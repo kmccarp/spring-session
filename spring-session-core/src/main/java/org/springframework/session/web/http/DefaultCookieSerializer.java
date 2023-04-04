@@ -99,7 +99,7 @@ public class DefaultCookieSerializer implements CookieSerializer {
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (this.cookieName.equals(cookie.getName())) {
-					String sessionId = (this.useBase64Encoding ? base64Decode(cookie.getValue()) : cookie.getValue());
+					String sessionId = this.useBase64Encoding ? base64Decode(cookie.getValue()) : cookie.getValue();
 					if (sessionId == null) {
 						continue;
 					}

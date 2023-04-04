@@ -84,7 +84,7 @@ public class ReactiveMongoSessionRepositoryTest {
 
 		this.repository.createSession() //
 				.as(StepVerifier::create) //
-				.expectNextMatches((mongoSession) -> {
+				.expectNextMatches(mongoSession -> {
 					assertThat(mongoSession.getId()).isNotEmpty();
 					assertThat(mongoSession.getMaxInactiveInterval())
 							.isEqualTo(Duration.ofSeconds(MapSession.DEFAULT_MAX_INACTIVE_INTERVAL_SECONDS));

@@ -92,7 +92,7 @@ public class SpringSessionWebSessionStore<S extends Session> implements WebSessi
 	@Override
 	public Mono<WebSession> retrieveSession(String sessionId) {
 		return this.sessions.findById(sessionId)
-				.doOnNext((session) -> session.setLastAccessedTime(this.clock.instant())).map(this::existingSession);
+				.doOnNext(session -> session.setLastAccessedTime(this.clock.instant())).map(this::existingSession);
 	}
 
 	@Override
@@ -117,7 +117,7 @@ public class SpringSessionWebSessionStore<S extends Session> implements WebSessi
 
 		private final Map<String, Object> attributes;
 
-		private AtomicReference<State> state = new AtomicReference<>();
+		private final AtomicReference<State> state = new AtomicReference<>();
 
 		SpringSessionWebSession(S session, State state) {
 			Assert.notNull(session, "session cannot be null");
@@ -152,7 +152,7 @@ public class SpringSessionWebSessionStore<S extends Session> implements WebSessi
 		@Override
 		public boolean isStarted() {
 			State value = this.state.get();
-			return (State.STARTED.equals(value) || (State.NEW.equals(value) && !getAttributes().isEmpty()));
+			return State.STARTED.equals(value) || (State.NEW.equals(value) && !getAttributes().isEmpty());
 		}
 
 		@Override
@@ -234,7 +234,7 @@ public class SpringSessionWebSessionStore<S extends Session> implements WebSessi
 		@Override
 		public boolean containsValue(Object value) {
 			return this.session.getAttributeNames().stream()
-					.anyMatch((attrName) -> this.session.getAttribute(attrName) != null);
+					.anyMatch(attrName -> this.session.getAttribute(attrName) != null);
 		}
 
 		@Override

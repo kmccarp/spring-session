@@ -110,7 +110,7 @@ public class ReactiveMongoWebSessionConfiguration
 		}
 
 		this.sessionRepositoryCustomizers
-				.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(repository));
+				.forEach(sessionRepositoryCustomizer -> sessionRepositoryCustomizer.customize(repository));
 
 		return repository;
 	}

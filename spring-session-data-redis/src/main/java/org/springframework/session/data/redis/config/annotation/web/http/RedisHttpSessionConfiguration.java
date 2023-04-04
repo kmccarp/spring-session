@@ -61,7 +61,7 @@ public class RedisHttpSessionConfiguration extends AbstractRedisHttpSessionConfi
 		sessionRepository.setFlushMode(getFlushMode());
 		sessionRepository.setSaveMode(getSaveMode());
 		getSessionRepositoryCustomizers()
-				.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(sessionRepository));
+				.forEach(sessionRepositoryCustomizer -> sessionRepositoryCustomizer.customize(sessionRepository));
 		return sessionRepository;
 	}
 

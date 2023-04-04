@@ -30,6 +30,8 @@ import org.springframework.session.SessionRepository;
 @SuppressWarnings("serial")
 public class SessionDeletedEvent extends SessionDestroyedEvent {
 
+	private static final long serialVersionUID = 1;
+
 	/**
 	 * Create a new {@link SessionDeletedEvent}.
 	 * @param source the source of the event

@@ -112,7 +112,7 @@ class ReactiveRedisSessionRepositoryTests {
 	@Test
 	void createSessionDefaultMaxInactiveInterval() {
 		StepVerifier.create(this.repository.createSession())
-				.consumeNextWith((session) -> assertThat(session.getMaxInactiveInterval())
+				.consumeNextWith(session -> assertThat(session.getMaxInactiveInterval())
 						.isEqualTo(Duration.ofSeconds(MapSession.DEFAULT_MAX_INACTIVE_INTERVAL_SECONDS)))
 				.verifyComplete();
 	}
@@ -123,7 +123,7 @@ class ReactiveRedisSessionRepositoryTests {
 		this.repository.setDefaultMaxInactiveInterval(interval);
 
 		StepVerifier.create(this.repository.createSession())
-				.consumeNextWith((session) -> assertThat(session.getMaxInactiveInterval()).isEqualTo(interval))
+				.consumeNextWith(session -> assertThat(session.getMaxInactiveInterval()).isEqualTo(interval))
 				.verifyComplete();
 	}
 
@@ -317,7 +317,7 @@ class ReactiveRedisSessionRepositoryTests {
 				RedisSessionMapper.LAST_ACCESSED_TIME_KEY, expected.getLastAccessedTime().toEpochMilli());
 		given(this.hashOperations.entries(anyString())).willReturn(Flux.fromIterable(map.entrySet()));
 
-		StepVerifier.create(this.repository.findById("test")).consumeNextWith((session) -> {
+		StepVerifier.create(this.repository.findById("test")).consumeNextWith(session -> {
 			verify(this.redisOperations).opsForHash();
 			verify(this.hashOperations).entries(anyString());
 			verifyNoMoreInteractions(this.redisOperations);

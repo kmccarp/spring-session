@@ -27,6 +27,8 @@ import org.springframework.session.Session;
 @SuppressWarnings("serial")
 public class SessionDestroyedEvent extends AbstractSessionEvent {
 
+	private static final long serialVersionUID = 1;
+
 	/**
 	 * Create a new {@link SessionDestroyedEvent}.
 	 * @param source the source of the event

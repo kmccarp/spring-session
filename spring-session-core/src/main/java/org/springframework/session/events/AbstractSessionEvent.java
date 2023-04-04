@@ -30,6 +30,8 @@ import org.springframework.session.SessionRepository;
 @SuppressWarnings("serial")
 public abstract class AbstractSessionEvent extends ApplicationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final String sessionId;
 
 	private final Session session;
