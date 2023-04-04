@@ -59,7 +59,7 @@ class HazelcastHttpSessionConfigurationTests {
 
 	private static final int MAX_INACTIVE_INTERVAL_IN_SECONDS = 600;
 
-	private AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+	private final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 
 	@AfterEach
 	void closeContext() {
@@ -442,13 +442,13 @@ class HazelcastHttpSessionConfigurationTests {
 		@Bean
 		@Order(0)
 		SessionRepositoryCustomizer<HazelcastIndexedSessionRepository> sessionRepositoryCustomizerOne() {
-			return (sessionRepository) -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
+			return sessionRepository -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
 		}
 
 		@Bean
 		@Order(1)
 		SessionRepositoryCustomizer<HazelcastIndexedSessionRepository> sessionRepositoryCustomizerTwo() {
-			return (sessionRepository) -> sessionRepository
+			return sessionRepository -> sessionRepository
 					.setDefaultMaxInactiveInterval(Duration.ofSeconds(MAX_INACTIVE_INTERVAL_IN_SECONDS));
 		}
 
@@ -460,7 +460,7 @@ class HazelcastHttpSessionConfigurationTests {
 
 		@Bean
 		SessionRepositoryCustomizer<HazelcastIndexedSessionRepository> sessionRepositoryCustomizer() {
-			return (sessionRepository) -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
+			return sessionRepository -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
 		}
 
 	}

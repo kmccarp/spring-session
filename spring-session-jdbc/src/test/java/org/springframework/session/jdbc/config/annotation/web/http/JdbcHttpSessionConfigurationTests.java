@@ -69,7 +69,7 @@ class JdbcHttpSessionConfigurationTests {
 
 	private static final String CLEANUP_CRON_EXPRESSION = "0 0 * * * *";
 
-	private AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+	private final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 
 	@AfterEach
 	void closeContext() {
@@ -552,13 +552,13 @@ class JdbcHttpSessionConfigurationTests {
 		@Bean
 		@Order(0)
 		SessionRepositoryCustomizer<JdbcIndexedSessionRepository> sessionRepositoryCustomizerOne() {
-			return (sessionRepository) -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
+			return sessionRepository -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
 		}
 
 		@Bean
 		@Order(1)
 		SessionRepositoryCustomizer<JdbcIndexedSessionRepository> sessionRepositoryCustomizerTwo() {
-			return (sessionRepository) -> sessionRepository
+			return sessionRepository -> sessionRepository
 					.setDefaultMaxInactiveInterval(Duration.ofSeconds(MAX_INACTIVE_INTERVAL_IN_SECONDS));
 		}
 
@@ -570,7 +570,7 @@ class JdbcHttpSessionConfigurationTests {
 
 		@Bean
 		SessionRepositoryCustomizer<JdbcIndexedSessionRepository> sessionRepositoryCustomizer() {
-			return (sessionRepository) -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
+			return sessionRepository -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
 		}
 
 	}

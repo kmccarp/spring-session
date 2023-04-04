@@ -29,6 +29,8 @@ import org.springframework.session.SessionRepository;
 @SuppressWarnings("serial")
 public class SessionCreatedEvent extends AbstractSessionEvent {
 
+	private static final long serialVersionUID = 1;
+
 	/**
 	 * Create a new {@link SessionCreatedEvent}.
 	 * @param source the source of the event

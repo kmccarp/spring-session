@@ -34,6 +34,8 @@ import org.springframework.web.socket.WebSocketSession;
 @SuppressWarnings("serial")
 public class SessionConnectEvent extends ApplicationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final WebSocketSession webSocketSession;
 
 	public SessionConnectEvent(Object source, WebSocketSession webSocketSession) {

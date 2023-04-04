@@ -96,7 +96,7 @@ public class ReactiveMongoSessionRepository
 
 		return Mono.justOrEmpty(this.defaultMaxInactiveInterval.toSeconds()) //
 				.map(MongoSession::new) //
-				.doOnNext((mongoSession) -> publishEvent(new SessionCreatedEvent(this, mongoSession))) //
+				.doOnNext(mongoSession -> publishEvent(new SessionCreatedEvent(this, mongoSession))) //
 				.switchIfEmpty(Mono.just(new MongoSession()));
 	}
 
@@ -105,7 +105,7 @@ public class ReactiveMongoSessionRepository
 
 		return Mono //
 				.justOrEmpty(MongoSessionUtils.convertToDBObject(this.mongoSessionConverter, session)) //
-				.flatMap((dbObject) -> {
+				.flatMap(dbObject -> {
 					if (session.hasChangedSessionId()) {
 
 						return this.mongoOperations
@@ -125,8 +125,8 @@ public class ReactiveMongoSessionRepository
 	public Mono<MongoSession> findById(String id) {
 
 		return findSession(id) //
-				.map((document) -> MongoSessionUtils.convertToSession(this.mongoSessionConverter, document)) //
-				.filter((mongoSession) -> !mongoSession.isExpired()) //
+				.map(document -> MongoSessionUtils.convertToSession(this.mongoSessionConverter, document)) //
+				.filter(mongoSession -> !mongoSession.isExpired()) //
 				.switchIfEmpty(Mono.defer(() -> this.deleteById(id).then(Mono.empty())));
 	}
 
@@ -134,10 +134,10 @@ public class ReactiveMongoSessionRepository
 	public Mono<Void> deleteById(String id) {
 
 		return findSession(id) //
-				.flatMap((document) -> this.mongoOperations.remove(document, this.collectionName) //
+				.flatMap(document -> this.mongoOperations.remove(document, this.collectionName) //
 						.then(Mono.just(document))) //
-				.map((document) -> MongoSessionUtils.convertToSession(this.mongoSessionConverter, document)) //
-				.doOnNext((mongoSession) -> publishEvent(new SessionDeletedEvent(this, mongoSession))) //
+				.map(document -> MongoSessionUtils.convertToSession(this.mongoSessionConverter, document)) //
+				.doOnNext(mongoSession -> publishEvent(new SessionDeletedEvent(this, mongoSession))) //
 				.then();
 	}
 

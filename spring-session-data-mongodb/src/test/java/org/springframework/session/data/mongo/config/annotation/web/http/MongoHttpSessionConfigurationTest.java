@@ -58,7 +58,7 @@ public class MongoHttpSessionConfigurationTest {
 
 	private static final int MAX_INACTIVE_INTERVAL_IN_SECONDS = 600;
 
-	private AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+	private final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 
 	@AfterEach
 	void after() {
@@ -299,13 +299,13 @@ public class MongoHttpSessionConfigurationTest {
 		@Bean
 		@Order(0)
 		SessionRepositoryCustomizer<MongoIndexedSessionRepository> sessionRepositoryCustomizerOne() {
-			return (sessionRepository) -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
+			return sessionRepository -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
 		}
 
 		@Bean
 		@Order(1)
 		SessionRepositoryCustomizer<MongoIndexedSessionRepository> sessionRepositoryCustomizerTwo() {
-			return (sessionRepository) -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ofSeconds(10000));
+			return sessionRepository -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ofSeconds(10000));
 		}
 
 	}
@@ -345,7 +345,7 @@ public class MongoHttpSessionConfigurationTest {
 
 		@Bean
 		SessionRepositoryCustomizer<MongoIndexedSessionRepository> sessionRepositoryCustomizer() {
-			return (sessionRepository) -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
+			return sessionRepository -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
 		}
 
 	}

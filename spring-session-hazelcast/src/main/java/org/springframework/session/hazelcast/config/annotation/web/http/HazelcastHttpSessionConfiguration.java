@@ -159,7 +159,7 @@ public class HazelcastHttpSessionConfiguration implements ImportAware {
 		sessionRepository.setFlushMode(this.flushMode);
 		sessionRepository.setSaveMode(this.saveMode);
 		this.sessionRepositoryCustomizers
-				.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(sessionRepository));
+				.forEach(sessionRepositoryCustomizer -> sessionRepositoryCustomizer.customize(sessionRepository));
 		return sessionRepository;
 	}
 

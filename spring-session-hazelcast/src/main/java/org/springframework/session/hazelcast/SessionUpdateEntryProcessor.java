@@ -35,6 +35,8 @@ import org.springframework.session.MapSession;
  */
 public class SessionUpdateEntryProcessor implements EntryProcessor<String, MapSession, Object> {
 
+	private static final long serialVersionUID = 1;
+
 	private Instant lastAccessedTime;
 
 	private Duration maxInactiveInterval;

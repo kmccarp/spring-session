@@ -102,7 +102,7 @@ public class RedisIndexedHttpSessionConfiguration
 		int database = resolveDatabase();
 		sessionRepository.setDatabase(database);
 		getSessionRepositoryCustomizers()
-				.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(sessionRepository));
+				.forEach(sessionRepositoryCustomizer -> sessionRepositoryCustomizer.customize(sessionRepository));
 		return sessionRepository;
 	}
 
