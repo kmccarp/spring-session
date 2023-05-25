@@ -57,11 +57,11 @@ public class ConfigureNotifyKeyspaceEventsAction implements ConfigureRedisAction
 		if (!customizedNotifyOptions.contains("E")) {
 			customizedNotifyOptions += "E";
 		}
-		boolean A = customizedNotifyOptions.contains("A");
-		if (!(A || customizedNotifyOptions.contains("g"))) {
+		boolean a = customizedNotifyOptions.contains("A");
+		if (!(a || customizedNotifyOptions.contains("g"))) {
 			customizedNotifyOptions += "g";
 		}
-		if (!(A || customizedNotifyOptions.contains("x"))) {
+		if (!(a || customizedNotifyOptions.contains("x"))) {
 			customizedNotifyOptions += "x";
 		}
 		if (!notifyOptions.equals(customizedNotifyOptions)) {

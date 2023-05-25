@@ -132,7 +132,7 @@ public class ReactiveRedisSessionRepository
 		}
 		String sessionKey = getSessionKey(session.hasChangedSessionId() ? session.originalSessionId : session.getId());
 		return this.sessionRedisOperations.hasKey(sessionKey).flatMap(
-				(exists) -> exists ? session.save() : Mono.error(new IllegalStateException("Session was invalidated")));
+				exists -> exists ? session.save() : Mono.error(new IllegalStateException("Session was invalidated")));
 	}
 
 	@Override
@@ -141,11 +141,11 @@ public class ReactiveRedisSessionRepository
 
 		// @formatter:off
 		return this.sessionRedisOperations.opsForHash().entries(sessionKey)
-				.collectMap((e) -> e.getKey().toString(), Map.Entry::getValue)
-				.filter((map) -> !map.isEmpty())
+				.collectMap(e -> e.getKey().toString(), Map.Entry::getValue)
+				.filter(map -> !map.isEmpty())
 				.map(new RedisSessionMapper(id))
-				.filter((session) -> !session.isExpired())
-				.map((session) -> new RedisSession(session, false))
+				.filter(session -> !session.isExpired())
+				.map(session -> new RedisSession(session, false))
 				.switchIfEmpty(Mono.defer(() -> deleteById(id).then(Mono.empty())));
 		// @formatter:on
 	}
@@ -192,7 +192,7 @@ public class ReactiveRedisSessionRepository
 				this.delta.put(RedisSessionMapper.LAST_ACCESSED_TIME_KEY, cached.getLastAccessedTime().toEpochMilli());
 			}
 			if (this.isNew || (ReactiveRedisSessionRepository.this.saveMode == SaveMode.ALWAYS)) {
-				getAttributeNames().forEach((attributeName) -> this.delta.put(getAttributeKey(attributeName),
+				getAttributeNames().forEach(attributeName -> this.delta.put(getAttributeKey(attributeName),
 						cached.getAttribute(attributeName)));
 			}
 		}
@@ -271,7 +271,7 @@ public class ReactiveRedisSessionRepository
 		}
 
 		private Mono<Void> save() {
-			return Mono.defer(() -> saveChangeSessionId().then(saveDelta()).doOnSuccess((aVoid) -> this.isNew = false));
+			return Mono.defer(() -> saveChangeSessionId().then(saveDelta()).doOnSuccess(aVoid -> this.isNew = false));
 		}
 
 		private Mono<Void> saveDelta() {
@@ -291,7 +291,7 @@ public class ReactiveRedisSessionRepository
 				setTtl = ReactiveRedisSessionRepository.this.sessionRedisOperations.persist(sessionKey);
 			}
 
-			return update.and(setTtl).and((s) -> {
+			return update.and(setTtl).and(s -> {
 				this.delta.clear();
 				s.onComplete();
 			}).then();
@@ -304,7 +304,7 @@ public class ReactiveRedisSessionRepository
 
 			String sessionId = getId();
 
-			Publisher<Void> replaceSessionId = (s) -> {
+			Publisher<Void> replaceSessionId = s -> {
 				this.originalSessionId = sessionId;
 				s.onComplete();
 			};
