@@ -33,7 +33,7 @@ public class GeoConfig {
 
 	@Bean
 	public DatabaseReader geoDatabaseReader(@Value("classpath:GeoLite2-City.mmdb") InputStream geoInputStream)
-			throws Exception {
+throws Exception {
 		return new DatabaseReader.Builder(geoInputStream).build();
 	}
 

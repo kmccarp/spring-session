@@ -60,7 +60,7 @@ public class SessionDetailsFilter extends OncePerRequestFilter {
 	// tag::dofilterinternal[]
 	@Override
 	public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
+throws IOException, ServletException {
 		chain.doFilter(request, response);
 
 		HttpSession session = request.getSession(false);
@@ -75,6 +75,7 @@ public class SessionDetailsFilter extends OncePerRequestFilter {
 			session.setAttribute("SESSION_DETAILS", details);
 		}
 	}
+
 	// end::dofilterinternal[]
 
 	String getGeoLocation(String remoteAddr) {

@@ -50,7 +50,7 @@ public final class WebSocketRegistryListener implements ApplicationListener<Appl
 	private static final Log logger = LogFactory.getLog(WebSocketRegistryListener.class);
 
 	static final CloseStatus SESSION_EXPIRED_STATUS = new CloseStatus(CloseStatus.POLICY_VIOLATION.getCode(),
-			"This connection was established under an authenticated HTTP Session that has expired");
+"This connection was established under an authenticated HTTP Session that has expired");
 
 	private final ConcurrentHashMap<String, Map<String, WebSocketSession>> httpSessionIdToWsSessions = new ConcurrentHashMap<>();
 
@@ -67,9 +67,9 @@ public final class WebSocketRegistryListener implements ApplicationListener<Appl
 		else if (event instanceof SessionDisconnectEvent) {
 			SessionDisconnectEvent e = (SessionDisconnectEvent) event;
 			Map<String, Object> sessionAttributes = SimpMessageHeaderAccessor
-					.getSessionAttributes(e.getMessage().getHeaders());
+		.getSessionAttributes(e.getMessage().getHeaders());
 			String httpSessionId = (sessionAttributes != null)
-					? SessionRepositoryMessageInterceptor.getSessionId(sessionAttributes) : null;
+		? SessionRepositoryMessageInterceptor.getSessionId(sessionAttributes) : null;
 			afterConnectionClosed(httpSessionId, e.getSessionId());
 		}
 	}
@@ -104,7 +104,7 @@ public final class WebSocketRegistryListener implements ApplicationListener<Appl
 				this.httpSessionIdToWsSessions.remove(httpSessionId);
 				if (logger.isDebugEnabled()) {
 					logger.debug("Removed the corresponding HTTP Session for " + wsSessionId
-							+ " since it contained no WebSocket mappings");
+				+ " since it contained no WebSocket mappings");
 				}
 			}
 		}
@@ -134,7 +134,7 @@ public final class WebSocketRegistryListener implements ApplicationListener<Appl
 			}
 			catch (IOException ex) {
 				logger.debug("Failed to close WebSocketSession (this is nothing to worry about but for debugging only)",
-						ex);
+			ex);
 			}
 		}
 	}

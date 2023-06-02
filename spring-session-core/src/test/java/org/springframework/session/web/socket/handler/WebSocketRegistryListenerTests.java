@@ -98,7 +98,7 @@ class WebSocketRegistryListenerTests {
 		this.connect = new SessionConnectEvent(this.listener, this.wsSession);
 		this.connect2 = new SessionConnectEvent(this.listener, this.wsSession2);
 		this.disconnect = new SessionDisconnectEvent(this.listener, this.message, this.wsSession.getId(),
-				CloseStatus.NORMAL);
+	CloseStatus.NORMAL);
 		this.deleted = new SessionDeletedEvent(this.listener, session);
 		this.expired = new SessionExpiredEvent(this.listener, session);
 	}
@@ -150,7 +150,7 @@ class WebSocketRegistryListenerTests {
 		this.listener.onApplicationEvent(this.disconnect);
 
 		Map<String, Map<String, WebSocketSession>> httpSessionIdToWsSessions = (Map<String, Map<String, WebSocketSession>>) ReflectionTestUtils
-				.getField(this.listener, "httpSessionIdToWsSessions");
+	.getField(this.listener, "httpSessionIdToWsSessions");
 		assertThat(httpSessionIdToWsSessions).isEmpty();
 	}
 

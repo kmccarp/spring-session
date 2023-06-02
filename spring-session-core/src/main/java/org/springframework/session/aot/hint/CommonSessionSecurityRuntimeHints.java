@@ -38,49 +38,49 @@ class CommonSessionSecurityRuntimeHints implements RuntimeHintsRegistrar {
 
 	private void registerSecurityHintsIfNeeded(RuntimeHints hints) {
 		Arrays.asList(TypeReference.of("org.springframework.security.core.context.SecurityContextImpl"),
-				TypeReference.of("org.springframework.security.core.authority.SimpleGrantedAuthority"),
-				TypeReference.of("org.springframework.security.core.userdetails.User"),
-				TypeReference.of("org.springframework.security.authentication.AbstractAuthenticationToken"),
-				TypeReference.of("org.springframework.security.authentication.UsernamePasswordAuthenticationToken"),
-				TypeReference.of("org.springframework.security.core.AuthenticationException"),
-				TypeReference.of("org.springframework.security.authentication.BadCredentialsException"),
-				TypeReference.of("org.springframework.security.core.userdetails.UsernameNotFoundException"),
-				TypeReference.of("org.springframework.security.authentication.AccountExpiredException"),
-				TypeReference.of("org.springframework.security.authentication.ProviderNotFoundException"),
-				TypeReference.of("org.springframework.security.authentication.DisabledException"),
-				TypeReference.of("org.springframework.security.authentication.LockedException"),
-				TypeReference.of("org.springframework.security.authentication.AuthenticationServiceException"),
-				TypeReference.of("org.springframework.security.authentication.CredentialsExpiredException"),
-				TypeReference.of("org.springframework.security.authentication.InsufficientAuthenticationException"),
-				TypeReference
-						.of("org.springframework.security.web.authentication.session.SessionAuthenticationException"),
-				TypeReference.of(
-						"org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationException"),
-				TypeReference.of("org.springframework.security.core.userdetails.User$AuthorityComparator"))
-				.forEach((type) -> hints.serialization().registerType(type, (hint) -> hint.onReachableType(
-						TypeReference.of("org.springframework.security.core.context.SecurityContextImpl"))));
+	TypeReference.of("org.springframework.security.core.authority.SimpleGrantedAuthority"),
+	TypeReference.of("org.springframework.security.core.userdetails.User"),
+	TypeReference.of("org.springframework.security.authentication.AbstractAuthenticationToken"),
+	TypeReference.of("org.springframework.security.authentication.UsernamePasswordAuthenticationToken"),
+	TypeReference.of("org.springframework.security.core.AuthenticationException"),
+	TypeReference.of("org.springframework.security.authentication.BadCredentialsException"),
+	TypeReference.of("org.springframework.security.core.userdetails.UsernameNotFoundException"),
+	TypeReference.of("org.springframework.security.authentication.AccountExpiredException"),
+	TypeReference.of("org.springframework.security.authentication.ProviderNotFoundException"),
+	TypeReference.of("org.springframework.security.authentication.DisabledException"),
+	TypeReference.of("org.springframework.security.authentication.LockedException"),
+	TypeReference.of("org.springframework.security.authentication.AuthenticationServiceException"),
+	TypeReference.of("org.springframework.security.authentication.CredentialsExpiredException"),
+	TypeReference.of("org.springframework.security.authentication.InsufficientAuthenticationException"),
+	TypeReference
+.of("org.springframework.security.web.authentication.session.SessionAuthenticationException"),
+	TypeReference.of(
+"org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationException"),
+	TypeReference.of("org.springframework.security.core.userdetails.User$AuthorityComparator"))
+	.forEach((type) -> hints.serialization().registerType(type, (hint) -> hint.onReachableType(
+TypeReference.of("org.springframework.security.core.context.SecurityContextImpl"))));
 	}
 
 	private void registerOAuth2ResourceServerHintsIfNeeded(RuntimeHints hints) {
 		Arrays.asList(
-				TypeReference.of("org.springframework.security.oauth2.server.resource.BearerTokenAuthenticationToken"),
-				TypeReference.of(
-						"org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken"),
-				TypeReference.of("org.springframework.security.oauth2.core.OAuth2AuthenticationException"))
-				.forEach((type) -> hints.serialization().registerType(type, (hint) -> hint.onReachableType(TypeReference
-						.of("org.springframework.security.oauth2.server.resource.BearerTokenAuthenticationToken"))));
+	TypeReference.of("org.springframework.security.oauth2.server.resource.BearerTokenAuthenticationToken"),
+	TypeReference.of(
+"org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken"),
+	TypeReference.of("org.springframework.security.oauth2.core.OAuth2AuthenticationException"))
+	.forEach((type) -> hints.serialization().registerType(type, (hint) -> hint.onReachableType(TypeReference
+.of("org.springframework.security.oauth2.server.resource.BearerTokenAuthenticationToken"))));
 	}
 
 	private void registerOAuth2ClientHintsIfNeeded(RuntimeHints hints) {
 		Arrays.asList(
-				TypeReference.of("org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken"),
-				TypeReference
-						.of("org.springframework.security.oauth2.client.authentication.OAuth2LoginAuthenticationToken"),
-				TypeReference.of(
-						"org.springframework.security.oauth2.client.authentication.OAuth2AuthorizationCodeAuthenticationToken"),
-				TypeReference.of("org.springframework.security.oauth2.core.OAuth2AuthenticationException"))
-				.forEach((type) -> hints.serialization().registerType(type, (hint) -> hint.onReachableType(TypeReference
-						.of("org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken"))));
+	TypeReference.of("org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken"),
+	TypeReference
+.of("org.springframework.security.oauth2.client.authentication.OAuth2LoginAuthenticationToken"),
+	TypeReference.of(
+"org.springframework.security.oauth2.client.authentication.OAuth2AuthorizationCodeAuthenticationToken"),
+	TypeReference.of("org.springframework.security.oauth2.core.OAuth2AuthenticationException"))
+	.forEach((type) -> hints.serialization().registerType(type, (hint) -> hint.onReachableType(TypeReference
+.of("org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken"))));
 	}
 
 }

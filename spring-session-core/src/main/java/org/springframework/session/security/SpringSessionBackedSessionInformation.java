@@ -76,7 +76,7 @@ class SpringSessionBackedSessionInformation<S extends Session> extends SessionIn
 	public void expireNow() {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Expiring session " + getSessionId() + " for user '" + getPrincipal()
-					+ "', presumably because maximum allowed concurrent " + "sessions was exceeded");
+		+ "', presumably because maximum allowed concurrent " + "sessions was exceeded");
 		}
 		super.expireNow();
 		S session = this.sessionRepository.findById(getSessionId());

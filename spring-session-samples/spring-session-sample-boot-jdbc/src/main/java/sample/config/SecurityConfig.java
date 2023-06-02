@@ -36,8 +36,9 @@ public class SecurityConfig {
 	@Bean
 	WebSecurityCustomizer ignoringCustomizer() {
 		return (web) -> web
-			.ignoring().requestMatchers(PathRequest.toH2Console());
+	.ignoring().requestMatchers(PathRequest.toH2Console());
 	}
+
 	// @formatter:on
 
 	// @formatter:off
@@ -45,14 +46,11 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http
-			.authorizeHttpRequests((authorize) -> authorize
-				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-				.anyRequest().authenticated()
-			)
-			.formLogin((formLogin) -> formLogin
-				.permitAll()
-			)
-			.build();
+	.authorizeHttpRequests((authorize) -> authorize.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().anyRequest().authenticated()
+	)
+	.formLogin((formLogin) -> formLogin.permitAll()
+	)
+	.build();
 	}
 	// end::config[]
 	// @formatter:on

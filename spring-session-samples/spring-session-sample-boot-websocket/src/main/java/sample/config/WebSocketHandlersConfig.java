@@ -36,13 +36,13 @@ public class WebSocketHandlersConfig<S extends Session> {
 
 	@Bean
 	public WebSocketConnectHandler<S> webSocketConnectHandler(SimpMessageSendingOperations messagingTemplate,
-			ActiveWebSocketUserRepository repository) {
+ActiveWebSocketUserRepository repository) {
 		return new WebSocketConnectHandler<>(messagingTemplate, repository);
 	}
 
 	@Bean
 	public WebSocketDisconnectHandler<S> webSocketDisconnectHandler(SimpMessageSendingOperations messagingTemplate,
-			ActiveWebSocketUserRepository repository) {
+ActiveWebSocketUserRepository repository) {
 		return new WebSocketDisconnectHandler<>(messagingTemplate, repository);
 	}
 

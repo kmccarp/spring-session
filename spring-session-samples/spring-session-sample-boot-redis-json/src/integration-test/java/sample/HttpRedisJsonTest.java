@@ -93,9 +93,9 @@ class HttpRedisJsonTest {
 		HomePage home = login.form().login(HomePage.class);
 		// @formatter:off
 		home = home.form()
-				.attributeName("Demo Key")
-				.attributeValue("Demo Value")
-				.submit(HomePage.class);
+	.attributeName("Demo Key")
+	.attributeValue("Demo Value")
+	.submit(HomePage.class);
 		// @formatter:on
 
 		List<Attribute> attributes = home.attributes();

@@ -35,15 +35,11 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http
-			.authorizeHttpRequests((authorize) -> authorize
-				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-				.anyRequest().authenticated()
-			)
-			.formLogin((formLogin) -> formLogin
-				.loginPage("/login")
-				.permitAll()
-			)
-			.build();
+	.authorizeHttpRequests((authorize) -> authorize.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().anyRequest().authenticated()
+	)
+	.formLogin((formLogin) -> formLogin.loginPage("/login").permitAll()
+	)
+	.build();
 	}
 	// @formatter:on
 

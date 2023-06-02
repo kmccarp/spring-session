@@ -45,7 +45,7 @@ public class MessageController {
 
 	@Autowired
 	public MessageController(ActiveWebSocketUserRepository activeUserRepository,
-			SimpMessageSendingOperations messagingTemplate) {
+SimpMessageSendingOperations messagingTemplate) {
 		this.activeUserRepository = activeUserRepository;
 		this.messagingTemplate = messagingTemplate;
 	}

@@ -82,13 +82,13 @@ class HazelcastIndexedSessionRepositoryTests {
 	@Test
 	void constructorNullHazelcastInstance() {
 		assertThatIllegalArgumentException().isThrownBy(() -> new HazelcastIndexedSessionRepository(null))
-				.withMessage("HazelcastInstance must not be null");
+	.withMessage("HazelcastInstance must not be null");
 	}
 
 	@Test
 	void setSaveModeNull() {
 		assertThatIllegalArgumentException().isThrownBy(() -> this.repository.setSaveMode(null))
-				.withMessage("saveMode must not be null");
+	.withMessage("saveMode must not be null");
 	}
 
 	@Test
@@ -123,7 +123,7 @@ class HazelcastIndexedSessionRepositoryTests {
 
 		this.repository.save(session);
 		verify(this.sessions, times(1)).set(eq(session.getId()), eq(session.getDelegate()), isA(Long.class),
-				eq(TimeUnit.SECONDS));
+	eq(TimeUnit.SECONDS));
 		verifyNoMoreInteractions(this.sessions);
 	}
 
@@ -135,7 +135,7 @@ class HazelcastIndexedSessionRepositoryTests {
 
 		HazelcastSession session = this.repository.createSession();
 		verify(this.sessions, times(1)).set(eq(session.getId()), eq(session.getDelegate()), isA(Long.class),
-				eq(TimeUnit.SECONDS));
+	eq(TimeUnit.SECONDS));
 		verifyNoMoreInteractions(this.sessions);
 	}
 
@@ -149,7 +149,7 @@ class HazelcastIndexedSessionRepositoryTests {
 
 		this.repository.save(session);
 		verify(this.sessions, times(1)).set(eq(session.getId()), eq(session.getDelegate()), isA(Long.class),
-				eq(TimeUnit.SECONDS));
+	eq(TimeUnit.SECONDS));
 		verifyNoMoreInteractions(this.sessions);
 	}
 
@@ -162,7 +162,7 @@ class HazelcastIndexedSessionRepositoryTests {
 		HazelcastSession session = this.repository.createSession();
 		session.setAttribute("testName", "testValue");
 		verify(this.sessions, times(1)).set(eq(session.getId()), eq(session.getDelegate()), isA(Long.class),
-				eq(TimeUnit.SECONDS));
+	eq(TimeUnit.SECONDS));
 		verify(this.sessions, times(1)).executeOnKey(eq(session.getId()), any(EntryProcessor.class));
 
 		this.repository.save(session);
@@ -179,7 +179,7 @@ class HazelcastIndexedSessionRepositoryTests {
 
 		this.repository.save(session);
 		verify(this.sessions, times(1)).set(eq(session.getId()), eq(session.getDelegate()), isA(Long.class),
-				eq(TimeUnit.SECONDS));
+	eq(TimeUnit.SECONDS));
 		verifyNoMoreInteractions(this.sessions);
 	}
 
@@ -192,7 +192,7 @@ class HazelcastIndexedSessionRepositoryTests {
 		HazelcastSession session = this.repository.createSession();
 		session.removeAttribute("testName");
 		verify(this.sessions, times(1)).set(eq(session.getId()), eq(session.getDelegate()), isA(Long.class),
-				eq(TimeUnit.SECONDS));
+	eq(TimeUnit.SECONDS));
 		verify(this.sessions, times(1)).executeOnKey(eq(session.getId()), any(EntryProcessor.class));
 
 		this.repository.save(session);
@@ -209,7 +209,7 @@ class HazelcastIndexedSessionRepositoryTests {
 
 		this.repository.save(session);
 		verify(this.sessions, times(1)).set(eq(session.getId()), eq(session.getDelegate()), isA(Long.class),
-				eq(TimeUnit.SECONDS));
+	eq(TimeUnit.SECONDS));
 		verifyNoMoreInteractions(this.sessions);
 	}
 
@@ -222,7 +222,7 @@ class HazelcastIndexedSessionRepositoryTests {
 		HazelcastSession session = this.repository.createSession();
 		session.setLastAccessedTime(Instant.now());
 		verify(this.sessions, times(1)).set(eq(session.getId()), eq(session.getDelegate()), isA(Long.class),
-				eq(TimeUnit.SECONDS));
+	eq(TimeUnit.SECONDS));
 		verify(this.sessions, times(1)).executeOnKey(eq(session.getId()), any(EntryProcessor.class));
 
 		this.repository.save(session);
@@ -239,7 +239,7 @@ class HazelcastIndexedSessionRepositoryTests {
 
 		this.repository.save(session);
 		verify(this.sessions, times(1)).set(eq(session.getId()), eq(session.getDelegate()), isA(Long.class),
-				eq(TimeUnit.SECONDS));
+	eq(TimeUnit.SECONDS));
 		verifyNoMoreInteractions(this.sessions);
 	}
 
@@ -253,7 +253,7 @@ class HazelcastIndexedSessionRepositoryTests {
 		String sessionId = session.getId();
 		session.setMaxInactiveInterval(Duration.ofSeconds(1));
 		verify(this.sessions, times(1)).set(eq(sessionId), eq(session.getDelegate()), isA(Long.class),
-				eq(TimeUnit.SECONDS));
+	eq(TimeUnit.SECONDS));
 		verify(this.sessions, times(1)).executeOnKey(eq(sessionId), any(EntryProcessor.class));
 
 		this.repository.save(session);
@@ -267,7 +267,7 @@ class HazelcastIndexedSessionRepositoryTests {
 		HazelcastSession session = this.repository.createSession();
 		this.repository.save(session);
 		verify(this.sessions, times(1)).set(eq(session.getId()), eq(session.getDelegate()), isA(Long.class),
-				eq(TimeUnit.SECONDS));
+	eq(TimeUnit.SECONDS));
 
 		this.repository.save(session);
 		verifyNoMoreInteractions(this.sessions);
@@ -281,7 +281,7 @@ class HazelcastIndexedSessionRepositoryTests {
 
 		HazelcastSession session = this.repository.createSession();
 		verify(this.sessions, times(1)).set(eq(session.getId()), eq(session.getDelegate()), isA(Long.class),
-				eq(TimeUnit.SECONDS));
+	eq(TimeUnit.SECONDS));
 
 		this.repository.save(session);
 		verifyNoMoreInteractions(this.sessions);
@@ -351,7 +351,7 @@ class HazelcastIndexedSessionRepositoryTests {
 		String indexValue = "testIndexValue";
 
 		Map<String, HazelcastSession> sessions = this.repository.findByIndexNameAndIndexValue("testIndexName",
-				indexValue);
+	indexValue);
 
 		assertThat(sessions).isEmpty();
 		verifyNoMoreInteractions(this.sessions);
@@ -364,7 +364,7 @@ class HazelcastIndexedSessionRepositoryTests {
 		String principal = "username";
 
 		Map<String, HazelcastSession> sessions = this.repository
-				.findByIndexNameAndIndexValue(FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME, principal);
+	.findByIndexNameAndIndexValue(FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME, principal);
 
 		assertThat(sessions).isEmpty();
 		verify(this.sessions, times(1)).values(isA(EqualPredicate.class));
@@ -377,7 +377,7 @@ class HazelcastIndexedSessionRepositoryTests {
 
 		String principal = "username";
 		Authentication authentication = new UsernamePasswordAuthenticationToken(principal, "notused",
-				AuthorityUtils.createAuthorityList("ROLE_USER"));
+	AuthorityUtils.createAuthorityList("ROLE_USER"));
 		List<MapSession> saved = new ArrayList<>(2);
 		MapSession saved1 = new MapSession();
 		saved1.setAttribute(SPRING_SECURITY_CONTEXT, authentication);
@@ -388,7 +388,7 @@ class HazelcastIndexedSessionRepositoryTests {
 		given(this.sessions.values(isA(EqualPredicate.class))).willReturn(saved);
 
 		Map<String, HazelcastSession> sessions = this.repository
-				.findByIndexNameAndIndexValue(FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME, principal);
+	.findByIndexNameAndIndexValue(FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME, principal);
 
 		assertThat(sessions).hasSize(2);
 		verify(this.sessions, times(1)).values(isA(EqualPredicate.class));

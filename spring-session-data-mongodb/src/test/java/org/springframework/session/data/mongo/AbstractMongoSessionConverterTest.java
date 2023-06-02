@@ -128,13 +128,13 @@ public abstract class AbstractMongoSessionConverterTest {
 	@Nullable
 	MongoSession convertToSession(DBObject session) {
 		return (MongoSession) getMongoSessionConverter().convert(session, TypeDescriptor.valueOf(DBObject.class),
-				TypeDescriptor.valueOf(MongoSession.class));
+	TypeDescriptor.valueOf(MongoSession.class));
 	}
 
 	@Nullable
 	DBObject convertToDBObject(MongoSession session) {
 		return (DBObject) getMongoSessionConverter().convert(session, TypeDescriptor.valueOf(MongoSession.class),
-				TypeDescriptor.valueOf(DBObject.class));
+	TypeDescriptor.valueOf(DBObject.class));
 	}
 
 }

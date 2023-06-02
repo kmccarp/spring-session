@@ -56,6 +56,7 @@ class RedisHttpSessionConfigurationNoOpConfigureRedisActionTests {
 		ConfigureRedisAction configureRedisAction() {
 			return ConfigureRedisAction.NO_OP;
 		}
+
 		// end::configure-redis-action[]
 
 		@Bean

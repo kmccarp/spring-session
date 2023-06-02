@@ -81,9 +81,9 @@ class AttributeTests {
 		HomePage home = HomePage.go(this.driver, this.port);
 		// @formatter:off
 		home = home.form()
-				.attributeName("a")
-				.attributeValue("b")
-				.submit(HomePage.class);
+	.attributeName("a")
+	.attributeValue("b")
+	.submit(HomePage.class);
 		// @formatter:on
 
 		List<Attribute> attributes = home.attributes();

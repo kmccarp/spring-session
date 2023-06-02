@@ -52,8 +52,7 @@ import org.springframework.util.Assert;
  * @author Vedran Pavic
  * @since 2.2.0
  */
-public class MongoIndexedSessionRepository
-		implements FindByIndexNameSessionRepository<MongoSession>, ApplicationEventPublisherAware, InitializingBean {
+public class MongoIndexedSessionRepositoryimplements FindByIndexNameSessionRepository<MongoSession>, ApplicationEventPublisherAware, InitializingBean {
 
 	/**
 	 * The default time period in seconds in which a session will expire.
@@ -77,7 +76,7 @@ public class MongoIndexedSessionRepository
 	private String collectionName = DEFAULT_COLLECTION_NAME;
 
 	private AbstractMongoSessionConverter mongoSessionConverter = new JdkMongoSessionConverter(
-			this.defaultMaxInactiveInterval);
+this.defaultMaxInactiveInterval);
 
 	private ApplicationEventPublisher eventPublisher;
 
@@ -137,10 +136,10 @@ public class MongoIndexedSessionRepository
 	public Map<String, MongoSession> findByIndexNameAndIndexValue(String indexName, String indexValue) {
 
 		return Optional.ofNullable(this.mongoSessionConverter.getQueryForIndex(indexName, indexValue))
-				.map((query) -> this.mongoOperations.find(query, Document.class, this.collectionName))
-				.orElse(Collections.emptyList()).stream()
-				.map((dbSession) -> MongoSessionUtils.convertToSession(this.mongoSessionConverter, dbSession))
-				.collect(Collectors.toMap(MongoSession::getId, (mapSession) -> mapSession));
+	.map((query) -> this.mongoOperations.find(query, Document.class, this.collectionName))
+	.orElse(Collections.emptyList()).stream()
+	.map((dbSession) -> MongoSessionUtils.convertToSession(this.mongoSessionConverter, dbSession))
+	.collect(Collectors.toMap(MongoSession::getId, (mapSession) -> mapSession));
 	}
 
 	@Override
@@ -191,7 +190,7 @@ public class MongoIndexedSessionRepository
 	 */
 	public void setDefaultMaxInactiveInterval(Duration defaultMaxInactiveInterval) {
 		org.springframework.util.Assert.notNull(defaultMaxInactiveInterval,
-				"defaultMaxInactiveInterval must not be null");
+	"defaultMaxInactiveInterval must not be null");
 		this.defaultMaxInactiveInterval = defaultMaxInactiveInterval;
 	}
 

@@ -66,7 +66,7 @@ public abstract class AbstractMongoRepositoryITest extends AbstractITest {
 		String expectedAttributeValue = "b";
 		toSave.setAttribute(expectedAttributeName, expectedAttributeValue);
 		Authentication toSaveToken = new UsernamePasswordAuthenticationToken(username, "password",
-				AuthorityUtils.createAuthorityList("ROLE_USER"));
+	AuthorityUtils.createAuthorityList("ROLE_USER"));
 		SecurityContext toSaveContext = SecurityContextHolder.createEmptyContext();
 		toSaveContext.setAuthentication(toSaveToken);
 		toSave.setAttribute(SPRING_SECURITY_CONTEXT, toSaveContext);
@@ -79,7 +79,7 @@ public abstract class AbstractMongoRepositoryITest extends AbstractITest {
 		assertThat(session.getId()).isEqualTo(toSave.getId());
 		assertThat(session.getAttributeNames()).isEqualTo(toSave.getAttributeNames());
 		assertThat(session.<String>getAttribute(expectedAttributeName))
-				.isEqualTo(toSave.getAttribute(expectedAttributeName));
+	.isEqualTo(toSave.getAttribute(expectedAttributeName));
 
 		this.repository.deleteById(toSave.getId());
 
@@ -119,7 +119,7 @@ public abstract class AbstractMongoRepositoryITest extends AbstractITest {
 		this.repository.save(toSave);
 
 		Map<String, MongoSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -150,7 +150,7 @@ public abstract class AbstractMongoRepositoryITest extends AbstractITest {
 		this.repository.save(toSave);
 
 		Map<String, MongoSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -171,7 +171,7 @@ public abstract class AbstractMongoRepositoryITest extends AbstractITest {
 		this.repository.save(toSave);
 
 		Map<String, MongoSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -190,7 +190,7 @@ public abstract class AbstractMongoRepositoryITest extends AbstractITest {
 		this.repository.save(toSave);
 
 		Map<String, MongoSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).isEmpty();
 	}
@@ -209,7 +209,7 @@ public abstract class AbstractMongoRepositoryITest extends AbstractITest {
 		this.repository.save(toSave);
 
 		Map<String, MongoSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 		assertThat(findByPrincipalName).isEmpty();
 
 		findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME, principalNameChanged);
@@ -232,7 +232,7 @@ public abstract class AbstractMongoRepositoryITest extends AbstractITest {
 		this.repository.save(getSession);
 
 		Map<String, MongoSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).isEmpty();
 	}
@@ -253,7 +253,7 @@ public abstract class AbstractMongoRepositoryITest extends AbstractITest {
 		this.repository.save(getSession);
 
 		Map<String, MongoSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 		assertThat(findByPrincipalName).isEmpty();
 
 		findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME, principalNameChanged);
@@ -271,7 +271,7 @@ public abstract class AbstractMongoRepositoryITest extends AbstractITest {
 		this.repository.save(toSave);
 
 		Map<String, MongoSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -296,7 +296,7 @@ public abstract class AbstractMongoRepositoryITest extends AbstractITest {
 		this.repository.save(toSave);
 
 		Map<String, MongoSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -314,7 +314,7 @@ public abstract class AbstractMongoRepositoryITest extends AbstractITest {
 		this.repository.save(toSave);
 
 		Map<String, MongoSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 
 		assertThat(findByPrincipalName).isEmpty();
 	}
@@ -331,7 +331,7 @@ public abstract class AbstractMongoRepositoryITest extends AbstractITest {
 		this.repository.save(toSave);
 
 		Map<String, MongoSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 		assertThat(findByPrincipalName).isEmpty();
 
 		findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME, getChangedSecurityName());
@@ -354,7 +354,7 @@ public abstract class AbstractMongoRepositoryITest extends AbstractITest {
 		this.repository.save(getSession);
 
 		Map<String, MongoSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 		assertThat(findByPrincipalName).isEmpty();
 
 		findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME, getChangedSecurityName());
@@ -400,7 +400,7 @@ public abstract class AbstractMongoRepositoryITest extends AbstractITest {
 		public MongoOperations mongoOperations(MongoDBContainer mongoContainer) {
 
 			MongoClient mongo = MongoClients
-					.create("mongodb://" + mongoContainer.getHost() + ":" + mongoContainer.getFirstMappedPort());
+		.create("mongodb://" + mongoContainer.getHost() + ":" + mongoContainer.getFirstMappedPort());
 			return new MongoTemplate(mongo, "test");
 		}
 

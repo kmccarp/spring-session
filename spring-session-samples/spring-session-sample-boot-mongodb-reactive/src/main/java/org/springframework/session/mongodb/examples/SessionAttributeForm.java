@@ -56,7 +56,7 @@ public class SessionAttributeForm {
 		}
 		SessionAttributeForm that = (SessionAttributeForm) o;
 		return Objects.equals(this.attributeName, that.attributeName)
-				&& Objects.equals(this.attributeValue, that.attributeValue);
+	&& Objects.equals(this.attributeValue, that.attributeValue);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class SessionAttributeForm {
 	public String toString() {
 
 		return "SessionAttributeForm{" + "attributeName='" + this.attributeName + '\'' + ", attributeValue='"
-				+ this.attributeValue + '\'' + '}';
+	+ this.attributeValue + '\'' + '}';
 	}
 
 }

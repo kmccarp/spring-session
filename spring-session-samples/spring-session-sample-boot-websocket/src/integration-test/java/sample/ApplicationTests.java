@@ -68,10 +68,10 @@ class ApplicationTests {
 
 		SockJsClient sockJsClient = new SockJsClient(transports);
 		CompletableFuture<WebSocketSession> wsSession = sockJsClient.execute(this.webSocketHandler,
-				"ws://localhost:" + this.port + "/sockjs");
+	"ws://localhost:" + this.port + "/sockjs");
 
 		assertThatExceptionOfType(ExecutionException.class)
-				.isThrownBy(() -> wsSession.get().sendMessage(new TextMessage("a")));
+	.isThrownBy(() -> wsSession.get().sendMessage(new TextMessage("a")));
 	}
 
 	@TestConfiguration

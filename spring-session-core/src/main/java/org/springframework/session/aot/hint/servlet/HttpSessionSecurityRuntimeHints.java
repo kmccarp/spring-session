@@ -39,14 +39,14 @@ class HttpSessionSecurityRuntimeHints implements RuntimeHintsRegistrar {
 	@Override
 	public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
 		if (!ClassUtils.isPresent("jakarta.servlet.http.HttpSession", classLoader)
-				|| !ClassUtils.isPresent("org.springframework.security.web.csrf.DefaultCsrfToken", classLoader)) {
+	|| !ClassUtils.isPresent("org.springframework.security.web.csrf.DefaultCsrfToken", classLoader)) {
 			return;
 		}
 		Arrays.asList(TypeReference.of(TreeMap.class), TypeReference.of(Locale.class),
-				TypeReference.of(DefaultSavedRequest.class), TypeReference.of(DefaultCsrfToken.class),
-				TypeReference.of(WebAuthenticationDetails.class), TypeReference.of(SavedCookie.class),
-				TypeReference.of("java.lang.String$CaseInsensitiveComparator"))
-				.forEach(hints.serialization()::registerType);
+	TypeReference.of(DefaultSavedRequest.class), TypeReference.of(DefaultCsrfToken.class),
+	TypeReference.of(WebAuthenticationDetails.class), TypeReference.of(SavedCookie.class),
+	TypeReference.of("java.lang.String$CaseInsensitiveComparator"))
+	.forEach(hints.serialization()::registerType);
 	}
 
 }

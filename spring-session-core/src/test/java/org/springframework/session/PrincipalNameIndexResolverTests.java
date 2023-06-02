@@ -55,7 +55,7 @@ class PrincipalNameIndexResolverTests {
 	@Test
 	void resolveFromSpringSecurityContext() {
 		Authentication authentication = new UsernamePasswordAuthenticationToken(PRINCIPAL_NAME, "notused",
-				AuthorityUtils.createAuthorityList("ROLE_USER"));
+	AuthorityUtils.createAuthorityList("ROLE_USER"));
 		SecurityContext context = new SecurityContextImpl();
 		context.setAuthentication(authentication);
 		MapSession session = new MapSession();

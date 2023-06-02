@@ -83,11 +83,11 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		}
 		this.context = SecurityContextHolder.createEmptyContext();
 		this.context.setAuthentication(new UsernamePasswordAuthenticationToken("username-" + UUID.randomUUID(), "na",
-				AuthorityUtils.createAuthorityList("ROLE_USER")));
+	AuthorityUtils.createAuthorityList("ROLE_USER")));
 
 		this.changedContext = SecurityContextHolder.createEmptyContext();
 		this.changedContext.setAuthentication(new UsernamePasswordAuthenticationToken(
-				"changedContext-" + UUID.randomUUID(), "na", AuthorityUtils.createAuthorityList("ROLE_USER")));
+	"changedContext-" + UUID.randomUUID(), "na", AuthorityUtils.createAuthorityList("ROLE_USER")));
 	}
 
 	@Test
@@ -101,7 +101,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		String expectedAttributeValue = "b";
 		toSave.setAttribute(expectedAttributeName, expectedAttributeValue);
 		Authentication toSaveToken = new UsernamePasswordAuthenticationToken(username, "password",
-				AuthorityUtils.createAuthorityList("ROLE_USER"));
+	AuthorityUtils.createAuthorityList("ROLE_USER"));
 		SecurityContext toSaveContext = SecurityContextHolder.createEmptyContext();
 		toSaveContext.setAuthentication(toSaveToken);
 		toSave.setAttribute(SPRING_SECURITY_CONTEXT, toSaveContext);
@@ -119,7 +119,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		assertThat(session.getId()).isEqualTo(toSave.getId());
 		assertThat(session.getAttributeNames()).isEqualTo(toSave.getAttributeNames());
 		assertThat(session.<String>getAttribute(expectedAttributeName))
-				.isEqualTo(toSave.getAttribute(expectedAttributeName));
+	.isEqualTo(toSave.getAttribute(expectedAttributeName));
 
 		this.registry.clear();
 
@@ -127,11 +127,11 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 
 		assertThat(this.repository.findById(toSave.getId())).isNull();
 		assertThat(this.registry.<SessionDestroyedEvent>getEvent(toSave.getId()))
-				.isInstanceOf(SessionDestroyedEvent.class);
+	.isInstanceOf(SessionDestroyedEvent.class);
 		assertThat(this.redis.boundSetOps(usernameSessionKey).members()).doesNotContain(toSave.getId());
 
 		assertThat(this.registry.getEvent(toSave.getId()).getSession().<String>getAttribute(expectedAttributeName))
-				.isEqualTo(expectedAttributeValue);
+	.isEqualTo(expectedAttributeValue);
 	}
 
 	@Test
@@ -164,7 +164,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(toSave);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -189,12 +189,12 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		String body = "RedisIndexedSessionRepositoryITests:sessions:expires:" + toSave.getId();
 		String channel = "__keyevent@0__:expired";
 		DefaultMessage message = new DefaultMessage(channel.getBytes(StandardCharsets.UTF_8),
-				body.getBytes(StandardCharsets.UTF_8));
-		byte[] pattern = new byte[] {};
+	body.getBytes(StandardCharsets.UTF_8));
+		byte[] pattern = new byte[]{};
 		this.repository.onMessage(message, pattern);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).hasSize(0);
 		assertThat(findByPrincipalName.keySet()).doesNotContain(toSave.getId());
@@ -212,7 +212,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(toSave);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -232,7 +232,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(toSave);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -250,7 +250,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(toSave);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).isEmpty();
 	}
@@ -268,7 +268,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(toSave);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 		assertThat(findByPrincipalName).isEmpty();
 
 		findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME, principalNameChanged);
@@ -290,7 +290,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(getSession);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).isEmpty();
 	}
@@ -310,7 +310,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(getSession);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 		assertThat(findByPrincipalName).isEmpty();
 
 		findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME, principalNameChanged);
@@ -327,7 +327,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(toSave);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -351,12 +351,12 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		String body = "RedisIndexedSessionRepositoryITests:sessions:expires:" + toSave.getId();
 		String channel = "__keyevent@0__:expired";
 		DefaultMessage message = new DefaultMessage(channel.getBytes(StandardCharsets.UTF_8),
-				body.getBytes(StandardCharsets.UTF_8));
-		byte[] pattern = new byte[] {};
+	body.getBytes(StandardCharsets.UTF_8));
+		byte[] pattern = new byte[]{};
 		this.repository.onMessage(message, pattern);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 
 		assertThat(findByPrincipalName).hasSize(0);
 		assertThat(findByPrincipalName.keySet()).doesNotContain(toSave.getId());
@@ -373,7 +373,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(toSave);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -392,7 +392,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(toSave);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -409,7 +409,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(toSave);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 
 		assertThat(findByPrincipalName).isEmpty();
 	}
@@ -425,7 +425,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(toSave);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 		assertThat(findByPrincipalName).isEmpty();
 
 		findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME, getChangedSecurityName());
@@ -446,7 +446,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(getSession);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getChangedSecurityName());
+	getChangedSecurityName());
 
 		assertThat(findByPrincipalName).isEmpty();
 	}
@@ -464,7 +464,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(getSession);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 		assertThat(findByPrincipalName).isEmpty();
 
 		findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME, getChangedSecurityName());
@@ -496,8 +496,8 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		String body = "RedisIndexedSessionRepositoryITests:sessions:expires:" + changeSessionId;
 		String channel = "__keyevent@0__:expired";
 		DefaultMessage message = new DefaultMessage(channel.getBytes(StandardCharsets.UTF_8),
-				body.getBytes(StandardCharsets.UTF_8));
-		byte[] pattern = new byte[] {};
+	body.getBytes(StandardCharsets.UTF_8));
+		byte[] pattern = new byte[]{};
 		this.repository.onMessage(message, pattern);
 
 		assertThat(this.redis.boundSetOps(usernameSessionKey).members()).isEmpty();
@@ -518,7 +518,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(findById);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 		assertThat(findByPrincipalName).isEmpty();
 
 		findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME, principalNameChanged);
@@ -542,7 +542,7 @@ class RedisIndexedSessionRepositoryITests extends AbstractRedisITests {
 		this.repository.save(findById);
 
 		Map<String, RedisSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 		assertThat(findByPrincipalName).isEmpty();
 
 		findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME, principalNameChanged);

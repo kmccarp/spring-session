@@ -59,7 +59,7 @@ abstract class AbstractHazelcastIndexedSessionRepositoryITests {
 		String sessionId = sessionToSave.getId();
 
 		IMap<String, MapSession> hazelcastMap = this.hazelcastInstance
-				.getMap(HazelcastIndexedSessionRepository.DEFAULT_SESSION_MAP_NAME);
+	.getMap(HazelcastIndexedSessionRepository.DEFAULT_SESSION_MAP_NAME);
 
 		this.repository.save(sessionToSave);
 
@@ -193,7 +193,7 @@ abstract class AbstractHazelcastIndexedSessionRepositoryITests {
 		String sessionId = session.getId();
 
 		Authentication authentication = new UsernamePasswordAuthenticationToken("saves-" + System.currentTimeMillis(),
-				"password", AuthorityUtils.createAuthorityList("ROLE_USER"));
+	"password", AuthorityUtils.createAuthorityList("ROLE_USER"));
 		SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
 		securityContext.setAuthentication(authentication);
 		session.setAttribute(SPRING_SECURITY_CONTEXT, securityContext);
@@ -208,13 +208,13 @@ abstract class AbstractHazelcastIndexedSessionRepositoryITests {
 	@Test
 	void createSessionWithSecurityContextAndFindByPrincipal() {
 		Assumptions.assumeTrue(this.hazelcastInstance instanceof HazelcastInstanceProxy,
-				"Hazelcast runs in embedded server topology");
+	"Hazelcast runs in embedded server topology");
 
 		HazelcastSession session = this.repository.createSession();
 
 		String username = "saves-" + System.currentTimeMillis();
 		Authentication authentication = new UsernamePasswordAuthenticationToken(username, "password",
-				AuthorityUtils.createAuthorityList("ROLE_USER"));
+	AuthorityUtils.createAuthorityList("ROLE_USER"));
 		SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
 		securityContext.setAuthentication(authentication);
 		session.setAttribute(SPRING_SECURITY_CONTEXT, securityContext);
@@ -222,8 +222,8 @@ abstract class AbstractHazelcastIndexedSessionRepositoryITests {
 		this.repository.save(session);
 
 		assertThat(this.repository
-				.findByIndexNameAndIndexValue(FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME, username))
-						.hasSize(1);
+	.findByIndexNameAndIndexValue(FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME, username))
+	.hasSize(1);
 
 		this.repository.deleteById(session.getId());
 	}
@@ -233,7 +233,7 @@ abstract class AbstractHazelcastIndexedSessionRepositoryITests {
 		final Duration defaultSessionTimeout = Duration.ofSeconds(1800);
 
 		final IMap<String, MapSession> hazelcastMap = this.hazelcastInstance
-				.getMap(HazelcastIndexedSessionRepository.DEFAULT_SESSION_MAP_NAME);
+	.getMap(HazelcastIndexedSessionRepository.DEFAULT_SESSION_MAP_NAME);
 
 		HazelcastSession session = this.repository.createSession();
 		String sessionId = session.getId();
@@ -256,7 +256,7 @@ abstract class AbstractHazelcastIndexedSessionRepositoryITests {
 		final Duration individualSessionTimeout = Duration.ofSeconds(23);
 
 		final IMap<String, MapSession> hazelcastMap = this.hazelcastInstance
-				.getMap(HazelcastIndexedSessionRepository.DEFAULT_SESSION_MAP_NAME);
+	.getMap(HazelcastIndexedSessionRepository.DEFAULT_SESSION_MAP_NAME);
 
 		HazelcastSession session = this.repository.createSession();
 		session.setMaxInactiveInterval(individualSessionTimeout);

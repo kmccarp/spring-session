@@ -64,7 +64,7 @@ public class SessionUpdateEntryProcessor implements EntryProcessor<String, MapSe
 			}
 		}
 		((ExtendedMapEntry<String, MapSession>) entry).setValue(value, value.getMaxInactiveInterval().getSeconds(),
-				TimeUnit.SECONDS);
+	TimeUnit.SECONDS);
 		return Boolean.TRUE;
 	}
 

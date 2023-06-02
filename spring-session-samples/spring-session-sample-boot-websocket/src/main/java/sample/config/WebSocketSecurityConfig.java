@@ -34,9 +34,9 @@ public class WebSocketSecurityConfig {
 	@Bean
 	AuthorizationManager<Message<?>> messageAuthorizationManager(MessageMatcherDelegatingAuthorizationManager.Builder messages) {
 		messages
-			.simpMessageDestMatchers("/queue/**", "/topic/**").denyAll()
-			.simpSubscribeDestMatchers("/queue/**/*-user*", "/topic/**/*-user*").denyAll()
-			.anyMessage().authenticated();
+	.simpMessageDestMatchers("/queue/**", "/topic/**").denyAll()
+	.simpSubscribeDestMatchers("/queue/**/*-user*", "/topic/**/*-user*").denyAll()
+	.anyMessage().authenticated();
 		return messages.build();
 	}
 	// @formatter:on

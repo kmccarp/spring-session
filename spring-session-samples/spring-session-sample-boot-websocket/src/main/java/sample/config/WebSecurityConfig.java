@@ -35,33 +35,32 @@ public class WebSecurityConfig {
 	// @formatter:off
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth,
-			UserDetailsService userDetailsService) throws Exception {
+UserDetailsService userDetailsService) throws Exception {
 		auth
-			.userDetailsService(userDetailsService)
-				.passwordEncoder(new BCryptPasswordEncoder());
+	.userDetailsService(userDetailsService)
+	.passwordEncoder(new BCryptPasswordEncoder());
 	}
+
 	// @formatter:on
 
 	// @formatter:off
 	@Bean
 	WebSecurityCustomizer ignoringCustomizer() {
 		return (web) -> web
-			.ignoring().requestMatchers(PathRequest.toH2Console());
+	.ignoring().requestMatchers(PathRequest.toH2Console());
 	}
+
 	// @formatter:on
 
 	// @formatter:off
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http
-			.authorizeHttpRequests((authorize) -> authorize
-				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-				.anyRequest().authenticated()
-			)
-			.formLogin((formLogin) -> formLogin
-				.permitAll()
-			)
-			.build();
+	.authorizeHttpRequests((authorize) -> authorize.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().anyRequest().authenticated()
+	)
+	.formLogin((formLogin) -> formLogin.permitAll()
+	)
+	.build();
 	}
 	// @formatter:on
 

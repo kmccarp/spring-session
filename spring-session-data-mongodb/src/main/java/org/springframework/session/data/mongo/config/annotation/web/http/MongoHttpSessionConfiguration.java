@@ -85,8 +85,8 @@ public class MongoHttpSessionConfiguration implements BeanClassLoaderAware, Embe
 		}
 		else {
 			JdkMongoSessionConverter mongoSessionConverter = new JdkMongoSessionConverter(new SerializingConverter(),
-					new DeserializingConverter(this.classLoader),
-					Duration.ofSeconds(MapSession.DEFAULT_MAX_INACTIVE_INTERVAL_SECONDS));
+		new DeserializingConverter(this.classLoader),
+		Duration.ofSeconds(MapSession.DEFAULT_MAX_INACTIVE_INTERVAL_SECONDS));
 
 			if (this.indexResolver != null) {
 				mongoSessionConverter.setIndexResolver(this.indexResolver);
@@ -100,7 +100,7 @@ public class MongoHttpSessionConfiguration implements BeanClassLoaderAware, Embe
 		}
 
 		this.sessionRepositoryCustomizers
-				.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(repository));
+	.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(repository));
 
 		return repository;
 	}
@@ -121,11 +121,11 @@ public class MongoHttpSessionConfiguration implements BeanClassLoaderAware, Embe
 	public void setImportMetadata(AnnotationMetadata importMetadata) {
 
 		AnnotationAttributes attributes = AnnotationAttributes
-				.fromMap(importMetadata.getAnnotationAttributes(EnableMongoHttpSession.class.getName()));
+	.fromMap(importMetadata.getAnnotationAttributes(EnableMongoHttpSession.class.getName()));
 
 		if (attributes != null) {
 			this.maxInactiveInterval = Duration
-					.ofSeconds(attributes.<Integer>getNumber("maxInactiveIntervalInSeconds"));
+		.ofSeconds(attributes.<Integer>getNumber("maxInactiveIntervalInSeconds"));
 		}
 
 		String collectionNameValue = (attributes != null) ? attributes.getString("collectionName") : "";
@@ -141,7 +141,7 @@ public class MongoHttpSessionConfiguration implements BeanClassLoaderAware, Embe
 
 	@Autowired(required = false)
 	public void setSessionRepositoryCustomizers(
-			ObjectProvider<SessionRepositoryCustomizer<MongoIndexedSessionRepository>> sessionRepositoryCustomizers) {
+ObjectProvider<SessionRepositoryCustomizer<MongoIndexedSessionRepository>> sessionRepositoryCustomizers) {
 		this.sessionRepositoryCustomizers = sessionRepositoryCustomizers.orderedStream().collect(Collectors.toList());
 	}
 

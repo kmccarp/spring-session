@@ -68,7 +68,7 @@ class Gh109Tests {
 		 */
 		@Bean
 		RedisIndexedSessionRepository sessionRepository(RedisOperations<String, Object> sessionRedisTemplate,
-				ApplicationEventPublisher applicationEventPublisher) {
+	ApplicationEventPublisher applicationEventPublisher) {
 			RedisIndexedSessionRepository sessionRepository = new RedisIndexedSessionRepository(sessionRedisTemplate);
 			sessionRepository.setDefaultMaxInactiveInterval(this.sessionTimeout);
 			return sessionRepository;

@@ -254,9 +254,7 @@ import org.springframework.util.Assert;
  * @author Vedran Pavic
  * @since 2.2.0
  */
-public class RedisIndexedSessionRepository
-		implements FindByIndexNameSessionRepository<RedisIndexedSessionRepository.RedisSession>, MessageListener,
-		InitializingBean, DisposableBean {
+public class RedisIndexedSessionRepositoryimplements FindByIndexNameSessionRepository<RedisIndexedSessionRepository.RedisSession>, MessageListener,InitializingBean, DisposableBean {
 
 	private static final Log logger = LogFactory.getLog(RedisIndexedSessionRepository.class);
 
@@ -330,7 +328,7 @@ public class RedisIndexedSessionRepository
 		Assert.notNull(sessionRedisOperations, "sessionRedisOperations cannot be null");
 		this.sessionRedisOperations = sessionRedisOperations;
 		this.expirationPolicy = new RedisSessionExpirationPolicy(sessionRedisOperations, this::getExpirationsKey,
-				this::getSessionKey);
+	this::getSessionKey);
 		configureSessionChannels();
 	}
 
@@ -651,7 +649,7 @@ public class RedisIndexedSessionRepository
 
 	String getPrincipalKey(String principalName) {
 		return this.namespace + "index:" + FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME + ":"
-				+ principalName;
+	+ principalName;
 	}
 
 	String getExpirationsKey(long expiration) {
@@ -746,12 +744,12 @@ public class RedisIndexedSessionRepository
 			if (this.isNew) {
 				this.delta.put(RedisSessionMapper.CREATION_TIME_KEY, cached.getCreationTime().toEpochMilli());
 				this.delta.put(RedisSessionMapper.MAX_INACTIVE_INTERVAL_KEY,
-						(int) cached.getMaxInactiveInterval().getSeconds());
+			(int) cached.getMaxInactiveInterval().getSeconds());
 				this.delta.put(RedisSessionMapper.LAST_ACCESSED_TIME_KEY, cached.getLastAccessedTime().toEpochMilli());
 			}
 			if (this.isNew || (RedisIndexedSessionRepository.this.saveMode == SaveMode.ALWAYS)) {
 				getAttributeNames().forEach((attributeName) -> this.delta.put(getSessionAttrNameKey(attributeName),
-						cached.getAttribute(attributeName)));
+			cached.getAttribute(attributeName)));
 			}
 		}
 
@@ -803,7 +801,7 @@ public class RedisIndexedSessionRepository
 		public <T> T getAttribute(String attributeName) {
 			T attributeValue = this.cached.getAttribute(attributeName);
 			if (attributeValue != null
-					&& RedisIndexedSessionRepository.this.saveMode.equals(SaveMode.ON_GET_ATTRIBUTE)) {
+		&& RedisIndexedSessionRepository.this.saveMode.equals(SaveMode.ON_GET_ATTRIBUTE)) {
 				this.delta.put(getSessionAttrNameKey(attributeName), attributeValue);
 			}
 			return attributeValue;
@@ -850,13 +848,13 @@ public class RedisIndexedSessionRepository
 			String sessionId = getId();
 			getSessionBoundHashOperations(sessionId).putAll(this.delta);
 			String principalSessionKey = getSessionAttrNameKey(
-					FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME);
+		FindByIndexNameSessionRepository.PRINCIPAL_NAME_INDEX_NAME);
 			String securityPrincipalSessionKey = getSessionAttrNameKey(SPRING_SECURITY_CONTEXT);
 			if (this.delta.containsKey(principalSessionKey) || this.delta.containsKey(securityPrincipalSessionKey)) {
 				if (this.originalPrincipalName != null) {
 					String originalPrincipalRedisKey = getPrincipalKey(this.originalPrincipalName);
 					RedisIndexedSessionRepository.this.sessionRedisOperations.boundSetOps(originalPrincipalRedisKey)
-							.remove(sessionId);
+				.remove(sessionId);
 				}
 				Map<String, String> indexes = RedisIndexedSessionRepository.this.indexResolver.resolveIndexesFor(this);
 				String principal = indexes.get(PRINCIPAL_NAME_INDEX_NAME);
@@ -864,7 +862,7 @@ public class RedisIndexedSessionRepository
 				if (principal != null) {
 					String principalRedisKey = getPrincipalKey(principal);
 					RedisIndexedSessionRepository.this.sessionRedisOperations.boundSetOps(principalRedisKey)
-							.add(sessionId);
+				.add(sessionId);
 				}
 			}
 			if (this.isNew) {
@@ -874,7 +872,7 @@ public class RedisIndexedSessionRepository
 			}
 			this.delta = new HashMap<>(this.delta.size());
 			Long originalExpiration = (this.originalLastAccessTime != null)
-					? this.originalLastAccessTime.plus(getMaxInactiveInterval()).toEpochMilli() : null;
+		? this.originalLastAccessTime.plus(getMaxInactiveInterval()).toEpochMilli() : null;
 			RedisIndexedSessionRepository.this.expirationPolicy.onExpirationUpdated(originalExpiration, this);
 		}
 
@@ -888,7 +886,7 @@ public class RedisIndexedSessionRepository
 				String sessionIdKey = getSessionKey(sessionId);
 				try {
 					RedisIndexedSessionRepository.this.sessionRedisOperations.rename(originalSessionIdKey,
-							sessionIdKey);
+				sessionIdKey);
 				}
 				catch (NonTransientDataAccessException ex) {
 					handleErrNoSuchKeyError(ex);
@@ -904,9 +902,9 @@ public class RedisIndexedSessionRepository
 				if (this.originalPrincipalName != null) {
 					String originalPrincipalRedisKey = getPrincipalKey(this.originalPrincipalName);
 					RedisIndexedSessionRepository.this.sessionRedisOperations.boundSetOps(originalPrincipalRedisKey)
-							.remove(this.originalSessionId);
+				.remove(this.originalSessionId);
 					RedisIndexedSessionRepository.this.sessionRedisOperations.boundSetOps(originalPrincipalRedisKey)
-							.add(sessionId);
+				.add(sessionId);
 				}
 			}
 			this.originalSessionId = sessionId;

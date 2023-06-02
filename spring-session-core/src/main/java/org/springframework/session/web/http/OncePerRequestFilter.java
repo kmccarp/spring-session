@@ -57,7 +57,7 @@ abstract class OncePerRequestFilter implements Filter {
 	 */
 	@Override
 	public final void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException {
+throws ServletException, IOException {
 
 		if (!(request instanceof HttpServletRequest) || !(response instanceof HttpServletResponse)) {
 			throw new ServletException("OncePerRequestFilter just supports HTTP requests");
@@ -119,7 +119,7 @@ abstract class OncePerRequestFilter implements Filter {
 	 * @throws IOException in case of I/O operation exception
 	 */
 	protected void doFilterNestedErrorDispatch(HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain) throws ServletException, IOException {
+FilterChain filterChain) throws ServletException, IOException {
 		doFilter(request, response, filterChain);
 	}
 
@@ -137,7 +137,7 @@ abstract class OncePerRequestFilter implements Filter {
 	 * @see Filter#doFilter
 	 */
 	protected abstract void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain) throws ServletException, IOException;
+FilterChain filterChain) throws ServletException, IOException;
 
 	@Override
 	public void init(FilterConfig config) {

@@ -55,8 +55,8 @@ public class SpringSessionBackedSessionRegistry<S extends Session> implements Se
 	@Override
 	public List<Object> getAllPrincipals() {
 		throw new UnsupportedOperationException("SpringSessionBackedSessionRegistry does "
-				+ "not support retrieving all principals, since Spring Session provides "
-				+ "no way to obtain that information");
+	+ "not support retrieving all principals, since Spring Session provides "
+	+ "no way to obtain that information");
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class SpringSessionBackedSessionRegistry<S extends Session> implements Se
 		List<SessionInformation> infos = new ArrayList<>();
 		for (S session : sessions) {
 			if (includeExpiredSessions
-					|| !Boolean.TRUE.equals(session.getAttribute(SpringSessionBackedSessionInformation.EXPIRED_ATTR))) {
+		|| !Boolean.TRUE.equals(session.getAttribute(SpringSessionBackedSessionInformation.EXPIRED_ATTR))) {
 				infos.add(new SpringSessionBackedSessionInformation<>(session, this.sessionRepository));
 			}
 		}

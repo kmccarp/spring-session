@@ -43,35 +43,34 @@ public class RememberMeSecurityConfiguration {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
-			// ... additional configuration ...
-			.rememberMe((rememberMe) -> rememberMe
-				.rememberMeServices(rememberMeServices())
-			);
+	// ... additional configuration ...
+	.rememberMe((rememberMe) -> rememberMe.rememberMeServices(rememberMeServices())
+	);
 		// end::http-rememberme[]
 
 		return http
-			.formLogin(Customizer.withDefaults())
-			.authorizeHttpRequests((authorize) -> authorize
-				.anyRequest().authenticated()
-			).build();
+	.formLogin(Customizer.withDefaults())
+	.authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated()
+	).build();
 	}
 
 	// tag::rememberme-bean[]
 	@Bean
 	public SpringSessionRememberMeServices rememberMeServices() {
 		SpringSessionRememberMeServices rememberMeServices =
-				new SpringSessionRememberMeServices();
+	new SpringSessionRememberMeServices();
 		// optionally customize
 		rememberMeServices.setAlwaysRemember(true);
 		return rememberMeServices;
 	}
+
 	// end::rememberme-bean[]
 	// @formatter:on
 
 	@Bean
 	public InMemoryUserDetailsManager userDetailsService() {
 		return new InMemoryUserDetailsManager(
-				User.withUsername("user").password("{noop}password").roles("USER").build());
+	User.withUsername("user").password("{noop}password").roles("USER").build());
 	}
 
 	@Bean

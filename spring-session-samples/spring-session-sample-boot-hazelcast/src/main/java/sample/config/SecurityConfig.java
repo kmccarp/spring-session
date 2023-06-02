@@ -35,14 +35,11 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http
-			.authorizeHttpRequests((authorize) -> authorize
-				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-				.anyRequest().authenticated()
-			)
-			.formLogin((formLogin) -> formLogin
-				.permitAll()
-			)
-			.build();
+	.authorizeHttpRequests((authorize) -> authorize.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().anyRequest().authenticated()
+	)
+	.formLogin((formLogin) -> formLogin.permitAll()
+	)
+	.build();
 	}
 	// end::config[]
 	// @formatter:on

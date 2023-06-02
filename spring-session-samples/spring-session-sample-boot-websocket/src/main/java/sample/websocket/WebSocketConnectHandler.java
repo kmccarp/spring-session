@@ -36,7 +36,7 @@ public class WebSocketConnectHandler<S> implements ApplicationListener<SessionCo
 	private SimpMessageSendingOperations messagingTemplate;
 
 	public WebSocketConnectHandler(SimpMessageSendingOperations messagingTemplate,
-			ActiveWebSocketUserRepository repository) {
+ActiveWebSocketUserRepository repository) {
 		super();
 		this.messagingTemplate = messagingTemplate;
 		this.repository = repository;

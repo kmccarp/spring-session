@@ -36,23 +36,22 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http
-			.authorizeHttpRequests((authorize) -> authorize
-				.anyRequest().authenticated()
-			)
-			.requestCache((requestCache) -> requestCache
-				.requestCache(new NullRequestCache())
-			)
-			.httpBasic(Customizer.withDefaults())
-			.sessionManagement((sessionManagement) -> sessionManagement
-				.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
-			.build();
+	.authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated()
+	)
+	.requestCache((requestCache) -> requestCache.requestCache(new NullRequestCache())
+	)
+	.httpBasic(Customizer.withDefaults())
+	.sessionManagement((sessionManagement) -> sessionManagement
+.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+	.build();
 	}
+
 	// @formatter:on
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication()
-				.withUser(User.withUsername("user").password("{noop}password").roles("USER").build());
+	.withUser(User.withUsername("user").password("{noop}password").roles("USER").build());
 	}
 
 }

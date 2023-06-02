@@ -46,7 +46,7 @@ import org.springframework.context.annotation.Import;
  * @since 2.0
  */
 @Retention(java.lang.annotation.RetentionPolicy.RUNTIME)
-@Target({ java.lang.annotation.ElementType.TYPE })
+@Target({java.lang.annotation.ElementType.TYPE})
 @Documented
 @Import(SpringWebSessionConfiguration.class)
 public @interface EnableSpringWebSession {

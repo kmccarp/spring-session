@@ -49,7 +49,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = { RestMockMvcTests.Config.class, SecurityConfig.class, MvcConfig.class })
+@ContextConfiguration(classes = {RestMockMvcTests.Config.class, SecurityConfig.class, MvcConfig.class})
 @WebAppConfiguration
 class RestMockMvcTests {
 
@@ -66,13 +66,13 @@ class RestMockMvcTests {
 	@BeforeEach
 	void setup() {
 		this.mvc = MockMvcBuilders.webAppContextSetup(this.context).alwaysDo(print())
-				.addFilters(this.sessionRepositoryFilter).apply(springSecurity()).build();
+	.addFilters(this.sessionRepositoryFilter).apply(springSecurity()).build();
 	}
 
 	@Test
 	void noSessionOnNoCredentials() throws Exception {
 		this.mvc.perform(get("/")).andExpect(header().doesNotExist("X-Auth-Token"))
-				.andExpect(status().isUnauthorized());
+	.andExpect(status().isUnauthorized());
 	}
 
 	@WithMockUser

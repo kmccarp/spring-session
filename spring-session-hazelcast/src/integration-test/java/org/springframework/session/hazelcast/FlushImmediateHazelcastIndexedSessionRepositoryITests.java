@@ -60,7 +60,7 @@ class FlushImmediateHazelcastIndexedSessionRepositoryITests {
 		String sessionId = session.getId();
 
 		Authentication authentication = new UsernamePasswordAuthenticationToken(username, "password",
-				AuthorityUtils.createAuthorityList("ROLE_USER"));
+	AuthorityUtils.createAuthorityList("ROLE_USER"));
 		SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
 		securityContext.setAuthentication(authentication);
 		session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
@@ -68,7 +68,7 @@ class FlushImmediateHazelcastIndexedSessionRepositoryITests {
 		this.repository.save(session);
 
 		Map<String, HazelcastIndexedSessionRepository.HazelcastSession> findByPrincipalName = this.repository
-				.findByPrincipalName(username);
+	.findByPrincipalName(username);
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(sessionId);

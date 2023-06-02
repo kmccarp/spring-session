@@ -74,8 +74,7 @@ import org.springframework.web.util.UrlPathHelper;
  * @author Rob Winch
  * @since 1.0
  */
-public abstract class AbstractSessionWebSocketMessageBrokerConfigurer<S extends Session>
-		implements WebSocketMessageBrokerConfigurer {
+public abstract class AbstractSessionWebSocketMessageBrokerConfigurer<S extends Session>implements WebSocketMessageBrokerConfigurer {
 
 	@Autowired
 	@SuppressWarnings("rawtypes")

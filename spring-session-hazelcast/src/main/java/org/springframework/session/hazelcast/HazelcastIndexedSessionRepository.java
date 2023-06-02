@@ -112,11 +112,7 @@ import org.springframework.util.Assert;
  * @author Eleftheria Stein
  * @since 2.2.0
  */
-public class HazelcastIndexedSessionRepository
-		implements FindByIndexNameSessionRepository<HazelcastIndexedSessionRepository.HazelcastSession>,
-		EntryAddedListener<String, MapSession>, EntryEvictedListener<String, MapSession>,
-		EntryRemovedListener<String, MapSession>, EntryExpiredListener<String, MapSession>, InitializingBean,
-		DisposableBean {
+public class HazelcastIndexedSessionRepositoryimplements FindByIndexNameSessionRepository<HazelcastIndexedSessionRepository.HazelcastSession>,EntryAddedListener<String, MapSession>, EntryEvictedListener<String, MapSession>,EntryRemovedListener<String, MapSession>, EntryExpiredListener<String, MapSession>, InitializingBean,DisposableBean {
 
 	/**
 	 * The default name of map used by Spring Session to store sessions.
@@ -256,13 +252,13 @@ public class HazelcastIndexedSessionRepository
 	public void save(HazelcastSession session) {
 		if (session.isNew) {
 			this.sessions.set(session.getId(), session.getDelegate(), session.getMaxInactiveInterval().getSeconds(),
-					TimeUnit.SECONDS);
+		TimeUnit.SECONDS);
 		}
 		else if (session.sessionIdChanged) {
 			this.sessions.delete(session.originalId);
 			session.originalId = session.getId();
 			this.sessions.set(session.getId(), session.getDelegate(), session.getMaxInactiveInterval().getSeconds(),
-					TimeUnit.SECONDS);
+		TimeUnit.SECONDS);
 		}
 		else if (session.hasChanges()) {
 			SessionUpdateEntryProcessor entryProcessor = new SessionUpdateEntryProcessor();
@@ -377,7 +373,7 @@ public class HazelcastIndexedSessionRepository
 			this.originalId = cached.getId();
 			if (this.isNew || (HazelcastIndexedSessionRepository.this.saveMode == SaveMode.ALWAYS)) {
 				getAttributeNames()
-						.forEach((attributeName) -> this.delta.put(attributeName, cached.getAttribute(attributeName)));
+			.forEach((attributeName) -> this.delta.put(attributeName, cached.getAttribute(attributeName)));
 			}
 		}
 
@@ -431,7 +427,7 @@ public class HazelcastIndexedSessionRepository
 		public <T> T getAttribute(String attributeName) {
 			T attributeValue = this.delegate.getAttribute(attributeName);
 			if (attributeValue != null
-					&& HazelcastIndexedSessionRepository.this.saveMode.equals(SaveMode.ON_GET_ATTRIBUTE)) {
+		&& HazelcastIndexedSessionRepository.this.saveMode.equals(SaveMode.ON_GET_ATTRIBUTE)) {
 				this.delta.put(attributeName, attributeValue);
 			}
 			return attributeValue;
@@ -448,7 +444,7 @@ public class HazelcastIndexedSessionRepository
 			this.delta.put(attributeName, attributeValue);
 			if (SPRING_SECURITY_CONTEXT.equals(attributeName)) {
 				Map<String, String> indexes = HazelcastIndexedSessionRepository.this.indexResolver
-						.resolveIndexesFor(this);
+			.resolveIndexesFor(this);
 				String principal = (attributeValue != null) ? indexes.get(PRINCIPAL_NAME_INDEX_NAME) : null;
 				this.delegate.setAttribute(PRINCIPAL_NAME_INDEX_NAME, principal);
 				this.delta.put(PRINCIPAL_NAME_INDEX_NAME, principal);

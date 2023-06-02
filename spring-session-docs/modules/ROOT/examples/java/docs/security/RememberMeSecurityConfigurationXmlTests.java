@@ -66,10 +66,10 @@ class RememberMeSecurityConfigurationXmlTests<T extends Session> {
 	void setup() {
 		// @formatter:off
 		this.mockMvc = MockMvcBuilders
-				.webAppContextSetup(this.context)
-				.addFilters(this.springSessionRepositoryFilter)
-				.apply(springSecurity())
-				.build();
+	.webAppContextSetup(this.context)
+	.addFilters(this.springSessionRepositoryFilter)
+	.apply(springSecurity())
+	.build();
 		// @formatter:on
 	}
 
@@ -77,8 +77,8 @@ class RememberMeSecurityConfigurationXmlTests<T extends Session> {
 	void authenticateWhenSpringSessionRememberMeEnabledThenCookieMaxAgeAndSessionExpirationSet() throws Exception {
 		// @formatter:off
 		MvcResult result = this.mockMvc
-			.perform(formLogin())
-			.andReturn();
+	.perform(formLogin())
+	.andReturn();
 		// @formatter:on
 
 		Cookie cookie = result.getResponse().getCookie("SESSION");

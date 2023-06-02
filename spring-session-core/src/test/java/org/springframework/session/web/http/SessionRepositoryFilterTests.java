@@ -381,7 +381,7 @@ class SessionRepositoryFilterTests {
 		assertThatIllegalStateException().isThrownBy(() -> doFilter(new DoInFilter() {
 			@Override
 			public void doFilter(HttpServletRequest wrappedRequest, HttpServletResponse wrappedResponse)
-					throws IOException {
+		throws IOException {
 				wrappedResponse.getWriter().flush();
 				wrappedRequest.getSession();
 			}
@@ -875,7 +875,7 @@ class SessionRepositoryFilterTests {
 		doFilter(new DoInFilter() {
 			@Override
 			public void doFilter(HttpServletRequest wrappedRequest, HttpServletResponse wrappedResponse)
-					throws IOException {
+		throws IOException {
 				String id = wrappedRequest.getSession().getId();
 				wrappedResponse.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 				assertThat(SessionRepositoryFilterTests.this.sessionRepository.findById(id)).isNotNull();
@@ -888,7 +888,7 @@ class SessionRepositoryFilterTests {
 		doFilter(new DoInFilter() {
 			@Override
 			public void doFilter(HttpServletRequest wrappedRequest, HttpServletResponse wrappedResponse)
-					throws IOException {
+		throws IOException {
 				String id = wrappedRequest.getSession().getId();
 				wrappedResponse.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error");
 				assertThat(SessionRepositoryFilterTests.this.sessionRepository.findById(id)).isNotNull();
@@ -901,7 +901,7 @@ class SessionRepositoryFilterTests {
 		doFilter(new DoInFilter() {
 			@Override
 			public void doFilter(HttpServletRequest wrappedRequest, HttpServletResponse wrappedResponse)
-					throws IOException {
+		throws IOException {
 				String id = wrappedRequest.getSession().getId();
 				wrappedResponse.sendRedirect("/");
 				assertThat(SessionRepositoryFilterTests.this.sessionRepository.findById(id)).isNotNull();
@@ -914,7 +914,7 @@ class SessionRepositoryFilterTests {
 		doFilter(new DoInFilter() {
 			@Override
 			public void doFilter(HttpServletRequest wrappedRequest, HttpServletResponse wrappedResponse)
-					throws IOException {
+		throws IOException {
 				String id = wrappedRequest.getSession().getId();
 				wrappedResponse.flushBuffer();
 				assertThat(SessionRepositoryFilterTests.this.sessionRepository.findById(id)).isNotNull();
@@ -927,7 +927,7 @@ class SessionRepositoryFilterTests {
 		doFilter(new DoInFilter() {
 			@Override
 			public void doFilter(HttpServletRequest wrappedRequest, HttpServletResponse wrappedResponse)
-					throws IOException {
+		throws IOException {
 				String id = wrappedRequest.getSession().getId();
 				wrappedResponse.getOutputStream().flush();
 				assertThat(SessionRepositoryFilterTests.this.sessionRepository.findById(id)).isNotNull();
@@ -940,7 +940,7 @@ class SessionRepositoryFilterTests {
 		doFilter(new DoInFilter() {
 			@Override
 			public void doFilter(HttpServletRequest wrappedRequest, HttpServletResponse wrappedResponse)
-					throws IOException {
+		throws IOException {
 				String id = wrappedRequest.getSession().getId();
 				wrappedResponse.getOutputStream().close();
 				assertThat(SessionRepositoryFilterTests.this.sessionRepository.findById(id)).isNotNull();
@@ -953,7 +953,7 @@ class SessionRepositoryFilterTests {
 		doFilter(new DoInFilter() {
 			@Override
 			public void doFilter(HttpServletRequest wrappedRequest, HttpServletResponse wrappedResponse)
-					throws IOException {
+		throws IOException {
 				String id = wrappedRequest.getSession().getId();
 				wrappedResponse.getWriter().flush();
 				assertThat(SessionRepositoryFilterTests.this.sessionRepository.findById(id)).isNotNull();
@@ -966,7 +966,7 @@ class SessionRepositoryFilterTests {
 		doFilter(new DoInFilter() {
 			@Override
 			public void doFilter(HttpServletRequest wrappedRequest, HttpServletResponse wrappedResponse)
-					throws IOException {
+		throws IOException {
 				String id = wrappedRequest.getSession().getId();
 				wrappedResponse.getWriter().close();
 				assertThat(SessionRepositoryFilterTests.this.sessionRepository.findById(id)).isNotNull();
@@ -979,7 +979,7 @@ class SessionRepositoryFilterTests {
 		doFilter(new DoInFilter() {
 			@Override
 			public void doFilter(HttpServletRequest wrappedRequest, HttpServletResponse wrappedResponse)
-					throws IOException, ServletException {
+		throws IOException, ServletException {
 				String id = wrappedRequest.getSession().getId();
 				wrappedRequest.getRequestDispatcher("/").include(wrappedRequest, wrappedResponse);
 				assertThat(SessionRepositoryFilterTests.this.sessionRepository.findById(id)).isNotNull();
@@ -998,7 +998,7 @@ class SessionRepositoryFilterTests {
 		final String expectedId = "HttpSessionIdResolver-requested-id";
 
 		given(this.strategy.resolveSessionIds(any(HttpServletRequest.class)))
-				.willReturn(Collections.singletonList(expectedId));
+	.willReturn(Collections.singletonList(expectedId));
 		given(sessionRepository.findById(anyString())).willReturn(new MapSession(expectedId));
 
 		doFilter(new DoInFilter() {
@@ -1020,7 +1020,7 @@ class SessionRepositoryFilterTests {
 		final String otherId = "HttpSessionIdResolver-requested-id2";
 
 		given(this.strategy.resolveSessionIds(any(HttpServletRequest.class)))
-				.willReturn(Arrays.asList(expectedId, otherId));
+	.willReturn(Arrays.asList(expectedId, otherId));
 
 		doFilter(new DoInFilter() {
 			@Override
@@ -1045,7 +1045,7 @@ class SessionRepositoryFilterTests {
 		HttpServletRequest request = (HttpServletRequest) this.chain.getRequest();
 		Session session = this.sessionRepository.findById(request.getSession().getId());
 		verify(this.strategy).setSessionId(any(HttpServletRequest.class), any(HttpServletResponse.class),
-				eq(session.getId()));
+	eq(session.getId()));
 	}
 
 	@Test
@@ -1188,8 +1188,8 @@ class SessionRepositoryFilterTests {
 	@Test
 	void order() {
 		assertThat(
-				AnnotationAwareOrderComparator.INSTANCE.compare(this.filter, new SessionRepositoryFilterDefaultOrder()))
-						.isZero();
+	AnnotationAwareOrderComparator.INSTANCE.compare(this.filter, new SessionRepositoryFilterDefaultOrder()))
+	.isZero();
 	}
 
 	// We want the filter to work without any dependencies on Spring
@@ -1201,7 +1201,7 @@ class SessionRepositoryFilterTests {
 	@Test
 	void setHttpSessionIdResolverNull() {
 		assertThatIllegalArgumentException().isThrownBy(() -> this.filter.setHttpSessionIdResolver(null))
-				.withMessage("httpSessionIdResolver cannot be null");
+	.withMessage("httpSessionIdResolver cannot be null");
 	}
 
 	@Test
@@ -1329,16 +1329,16 @@ class SessionRepositoryFilterTests {
 		assertThat(cookie.getValue()).isNotEqualTo("INVALID");
 		assertThat(cookie.isHttpOnly()).describedAs("Cookie is expected to be HTTP Only").isTrue();
 		assertThat(cookie.getSecure()).describedAs("Cookie secured is expected to be " + this.request.isSecure())
-				.isEqualTo(this.request.isSecure());
+	.isEqualTo(this.request.isSecure());
 		assertThat(this.request.getSession(false))
-				.describedAs("The original HttpServletRequest HttpSession should be null").isNull();
+	.describedAs("The original HttpServletRequest HttpSession should be null").isNull();
 	}
 
 	private void assertNoSession() {
 		Cookie cookie = getSessionCookie();
 		assertThat(cookie).isNull();
 		assertThat(this.request.getSession(false))
-				.describedAs("The original HttpServletRequest HttpSession should be null").isNull();
+	.describedAs("The original HttpServletRequest HttpSession should be null").isNull();
 	}
 
 	private Cookie getSessionCookie() {
@@ -1377,7 +1377,7 @@ class SessionRepositoryFilterTests {
 		}, new OncePerRequestFilter() {
 			@Override
 			protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
-					FilterChain filterChain) throws ServletException, IOException {
+		FilterChain filterChain) throws ServletException, IOException {
 				doInFilter.doFilter(request, response);
 			}
 		});
@@ -1404,7 +1404,7 @@ class SessionRepositoryFilterTests {
 	private abstract static class DoInFilter {
 
 		void doFilter(HttpServletRequest wrappedRequest, HttpServletResponse wrappedResponse)
-				throws ServletException, IOException {
+	throws ServletException, IOException {
 			doFilter(wrappedRequest);
 		}
 

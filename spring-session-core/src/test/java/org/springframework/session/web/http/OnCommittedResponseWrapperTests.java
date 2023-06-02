@@ -302,7 +302,7 @@ class OnCommittedResponseWrapperTests {
 	@Test
 	void printWriterPrintfStringObjectVargs() throws Exception {
 		String format = "format";
-		Object[] args = new Object[] { "1" };
+		Object[] args = new Object[]{"1"};
 
 		this.response.getWriter().printf(format, args);
 
@@ -313,7 +313,7 @@ class OnCommittedResponseWrapperTests {
 	void printWriterPrintfLocaleStringObjectVargs() throws Exception {
 		Locale l = Locale.US;
 		String format = "format";
-		Object[] args = new Object[] { "1" };
+		Object[] args = new Object[]{"1"};
 
 		this.response.getWriter().printf(l, format, args);
 
@@ -323,7 +323,7 @@ class OnCommittedResponseWrapperTests {
 	@Test
 	void printWriterFormatStringObjectVargs() throws Exception {
 		String format = "format";
-		Object[] args = new Object[] { "1" };
+		Object[] args = new Object[]{"1"};
 
 		this.response.getWriter().format(format, args);
 
@@ -334,7 +334,7 @@ class OnCommittedResponseWrapperTests {
 	void printWriterFormatLocaleStringObjectVargs() throws Exception {
 		Locale l = Locale.US;
 		String format = "format";
-		Object[] args = new Object[] { "1" };
+		Object[] args = new Object[]{"1"};
 
 		this.response.getWriter().format(l, format, args);
 
@@ -900,8 +900,8 @@ class OnCommittedResponseWrapperTests {
 	@Test
 	void contentLengthPlus1OutputStreamWriteByteArrayMultiDigitCommits() throws Exception {
 		String expected = "{\n" + "  \"parameterName\" : \"_csrf\",\n"
-				+ "  \"token\" : \"06300b65-c4aa-4c8f-8cda-39ee17f545a0\",\n" + "  \"headerName\" : \"X-CSRF-TOKEN\"\n"
-				+ "}";
+	+ "  \"token\" : \"06300b65-c4aa-4c8f-8cda-39ee17f545a0\",\n" + "  \"headerName\" : \"X-CSRF-TOKEN\"\n"
+	+ "}";
 		this.response.setContentLength(expected.length() + 1);
 
 		this.response.getOutputStream().write(expected.getBytes());

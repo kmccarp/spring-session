@@ -39,12 +39,10 @@ public class SecurityConfiguration<S extends Session> {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		// @formatter:off
 		return http
-			// other config goes here...
-			.sessionManagement((sessionManagement) -> sessionManagement
-				.maximumSessions(2)
-				.sessionRegistry(sessionRegistry())
-			)
-			.build();
+	// other config goes here...
+	.sessionManagement((sessionManagement) -> sessionManagement.maximumSessions(2).sessionRegistry(sessionRegistry())
+	)
+	.build();
 		// @formatter:on
 	}
 

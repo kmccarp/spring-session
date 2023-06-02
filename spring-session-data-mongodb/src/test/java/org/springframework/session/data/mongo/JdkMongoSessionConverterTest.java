@@ -44,13 +44,13 @@ public class JdkMongoSessionConverterTest extends AbstractMongoSessionConverterT
 	@Test
 	void constructorNullSerializer() {
 		assertThatIllegalArgumentException().isThrownBy(
-				() -> new JdkMongoSessionConverter(null, new DeserializingConverter(), this.inactiveInterval));
+	() -> new JdkMongoSessionConverter(null, new DeserializingConverter(), this.inactiveInterval));
 	}
 
 	@Test
 	void constructorNullDeserializer() {
 		assertThatIllegalArgumentException().isThrownBy(
-				() -> new JdkMongoSessionConverter(new SerializingConverter(), null, this.inactiveInterval));
+	() -> new JdkMongoSessionConverter(new SerializingConverter(), null, this.inactiveInterval));
 	}
 
 }

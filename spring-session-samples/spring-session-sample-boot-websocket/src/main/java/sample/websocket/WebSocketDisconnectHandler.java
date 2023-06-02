@@ -31,7 +31,7 @@ public class WebSocketDisconnectHandler<S> implements ApplicationListener<Sessio
 	private SimpMessageSendingOperations messagingTemplate;
 
 	public WebSocketDisconnectHandler(SimpMessageSendingOperations messagingTemplate,
-			ActiveWebSocketUserRepository repository) {
+ActiveWebSocketUserRepository repository) {
 		super();
 		this.messagingTemplate = messagingTemplate;
 		this.repository = repository;
@@ -46,7 +46,7 @@ public class WebSocketDisconnectHandler<S> implements ApplicationListener<Sessio
 		this.repository.findById(id).ifPresent((user) -> {
 			this.repository.deleteById(id);
 			this.messagingTemplate.convertAndSend("/topic/friends/signout",
-					Collections.singletonList(user.getUsername()));
+		Collections.singletonList(user.getUsername()));
 		});
 	}
 

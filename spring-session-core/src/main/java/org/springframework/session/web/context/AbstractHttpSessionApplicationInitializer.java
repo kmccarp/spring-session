@@ -182,11 +182,11 @@ public abstract class AbstractHttpSessionApplicationInitializer implements WebAp
 	 * @param filter the filter
 	 */
 	private void registerFilter(ServletContext servletContext, boolean insertBeforeOtherFilters, String filterName,
-			Filter filter) {
+Filter filter) {
 		Dynamic registration = servletContext.addFilter(filterName, filter);
 		if (registration == null) {
 			throw new IllegalStateException("Duplicate Filter registration for '" + filterName
-					+ "'. Check to ensure the Filter is only configured once.");
+		+ "'. Check to ensure the Filter is only configured once.");
 		}
 		registration.setAsyncSupported(isAsyncSessionSupported());
 		EnumSet<DispatcherType> dispatcherTypes = getSessionDispatcherTypes();

@@ -48,6 +48,7 @@ public class IndexController {
 		model.addAttribute("sessions", usersSessions);
 		return "index";
 	}
+
 	// end::findbyusername[]
 
 	@PostMapping("/sessions/{sessionIdToDelete}")

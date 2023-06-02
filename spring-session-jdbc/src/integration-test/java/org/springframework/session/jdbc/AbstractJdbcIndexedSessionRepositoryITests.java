@@ -91,11 +91,11 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.lobHandler = new DefaultLobHandler();
 		this.context = SecurityContextHolder.createEmptyContext();
 		this.context.setAuthentication(new UsernamePasswordAuthenticationToken("username-" + UUID.randomUUID(), "na",
-				AuthorityUtils.createAuthorityList("ROLE_USER")));
+	AuthorityUtils.createAuthorityList("ROLE_USER")));
 
 		this.changedContext = SecurityContextHolder.createEmptyContext();
 		this.changedContext.setAuthentication(new UsernamePasswordAuthenticationToken(
-				"changedContext-" + UUID.randomUUID(), "na", AuthorityUtils.createAuthorityList("ROLE_USER")));
+	"changedContext-" + UUID.randomUUID(), "na", AuthorityUtils.createAuthorityList("ROLE_USER")));
 	}
 
 	@Test
@@ -119,7 +119,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		String expectedAttributeValue = "b";
 		toSave.setAttribute(expectedAttributeName, expectedAttributeValue);
 		Authentication toSaveToken = new UsernamePasswordAuthenticationToken(username, "password",
-				AuthorityUtils.createAuthorityList("ROLE_USER"));
+	AuthorityUtils.createAuthorityList("ROLE_USER"));
 		SecurityContext toSaveContext = SecurityContextHolder.createEmptyContext();
 		toSaveContext.setAuthentication(toSaveToken);
 		toSave.setAttribute(SPRING_SECURITY_CONTEXT, toSaveContext);
@@ -134,7 +134,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		assertThat(session.getDelta()).isEmpty();
 		assertThat(session.getAttributeNames()).isEqualTo(toSave.getAttributeNames());
 		assertThat(session.<String>getAttribute(expectedAttributeName))
-				.isEqualTo(toSave.getAttribute(expectedAttributeName));
+	.isEqualTo(toSave.getAttribute(expectedAttributeName));
 
 		this.repository.deleteById(toSave.getId());
 
@@ -190,7 +190,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		assertThat(session.getDelta()).isEmpty();
 		assertThat(session.isExpired()).isFalse();
 		assertThat(session.getLastAccessedTime().truncatedTo(ChronoUnit.MILLIS))
-				.isEqualTo(lastAccessedTime.truncatedTo(ChronoUnit.MILLIS));
+	.isEqualTo(lastAccessedTime.truncatedTo(ChronoUnit.MILLIS));
 	}
 
 	@Test
@@ -202,7 +202,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.save(toSave);
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -226,7 +226,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.cleanUpExpiredSessions();
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).hasSize(0);
 		assertThat(findByPrincipalName.keySet()).doesNotContain(toSave.getId());
@@ -244,7 +244,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.save(toSave);
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -268,7 +268,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.save(toSave);
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -290,7 +290,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.save(toSave);
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).isEmpty();
 	}
@@ -308,7 +308,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.save(toSave);
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 		assertThat(findByPrincipalName).isEmpty();
 
 		findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME, principalNameChanged);
@@ -334,7 +334,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.save(getSession);
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 
 		assertThat(findByPrincipalName).isEmpty();
 	}
@@ -354,7 +354,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.save(getSession);
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				principalName);
+	principalName);
 		assertThat(findByPrincipalName).isEmpty();
 
 		findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME, principalNameChanged);
@@ -375,7 +375,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.save(toSave);
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -398,7 +398,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.cleanUpExpiredSessions();
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 
 		assertThat(findByPrincipalName).hasSize(0);
 		assertThat(findByPrincipalName.keySet()).doesNotContain(toSave.getId());
@@ -415,7 +415,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.save(toSave);
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -438,7 +438,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.save(toSave);
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 
 		assertThat(findByPrincipalName).hasSize(1);
 		assertThat(findByPrincipalName.keySet()).containsOnly(toSave.getId());
@@ -459,7 +459,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.save(toSave);
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 
 		assertThat(findByPrincipalName).isEmpty();
 	}
@@ -475,7 +475,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.save(toSave);
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 		assertThat(findByPrincipalName).isEmpty();
 
 		findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME, getChangedSecurityName());
@@ -500,7 +500,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.save(getSession);
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getChangedSecurityName());
+	getChangedSecurityName());
 
 		assertThat(findByPrincipalName).isEmpty();
 	}
@@ -518,7 +518,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 		this.repository.save(getSession);
 
 		Map<String, JdbcSession> findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME,
-				getSecurityName());
+	getSecurityName());
 		assertThat(findByPrincipalName).isEmpty();
 
 		findByPrincipalName = this.repository.findByIndexNameAndIndexValue(INDEX_NAME, getChangedSecurityName());
@@ -816,7 +816,7 @@ abstract class AbstractJdbcIndexedSessionRepositoryITests {
 			// with DB specific upsert configured we're fine
 			assertThatCode(() -> this.repository.save(session)).doesNotThrowAnyException();
 			assertThat((String) this.repository.findById(session.getId()).getAttribute(attributeName))
-					.isEqualTo(attributeValue);
+		.isEqualTo(attributeValue);
 		}
 	}
 

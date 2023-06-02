@@ -103,8 +103,8 @@ public class HazelcastHttpSessionConfiguration implements ImportAware {
 
 	@Autowired
 	public void setHazelcastInstance(
-			@SpringSessionHazelcastInstance ObjectProvider<HazelcastInstance> springSessionHazelcastInstance,
-			ObjectProvider<HazelcastInstance> hazelcastInstance) {
+@SpringSessionHazelcastInstance ObjectProvider<HazelcastInstance> springSessionHazelcastInstance,
+ObjectProvider<HazelcastInstance> hazelcastInstance) {
 		HazelcastInstance hazelcastInstanceToUse = springSessionHazelcastInstance.getIfAvailable();
 		if (hazelcastInstanceToUse == null) {
 			hazelcastInstanceToUse = hazelcastInstance.getObject();
@@ -124,14 +124,14 @@ public class HazelcastHttpSessionConfiguration implements ImportAware {
 
 	@Autowired(required = false)
 	public void setSessionRepositoryCustomizer(
-			ObjectProvider<SessionRepositoryCustomizer<HazelcastIndexedSessionRepository>> sessionRepositoryCustomizers) {
+ObjectProvider<SessionRepositoryCustomizer<HazelcastIndexedSessionRepository>> sessionRepositoryCustomizers) {
 		this.sessionRepositoryCustomizers = sessionRepositoryCustomizers.orderedStream().collect(Collectors.toList());
 	}
 
 	@Override
 	public void setImportMetadata(AnnotationMetadata importMetadata) {
 		Map<String, Object> attributeMap = importMetadata
-				.getAnnotationAttributes(EnableHazelcastHttpSession.class.getName());
+	.getAnnotationAttributes(EnableHazelcastHttpSession.class.getName());
 		AnnotationAttributes attributes = AnnotationAttributes.fromMap(attributeMap);
 		if (attributes == null) {
 			return;
@@ -147,7 +147,7 @@ public class HazelcastHttpSessionConfiguration implements ImportAware {
 
 	private HazelcastIndexedSessionRepository createHazelcastIndexedSessionRepository() {
 		HazelcastIndexedSessionRepository sessionRepository = new HazelcastIndexedSessionRepository(
-				this.hazelcastInstance);
+	this.hazelcastInstance);
 		sessionRepository.setApplicationEventPublisher(this.applicationEventPublisher);
 		if (this.indexResolver != null) {
 			sessionRepository.setIndexResolver(this.indexResolver);
@@ -159,7 +159,7 @@ public class HazelcastHttpSessionConfiguration implements ImportAware {
 		sessionRepository.setFlushMode(this.flushMode);
 		sessionRepository.setSaveMode(this.saveMode);
 		this.sessionRepositoryCustomizers
-				.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(sessionRepository));
+	.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(sessionRepository));
 		return sessionRepository;
 	}
 

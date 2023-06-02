@@ -36,22 +36,22 @@ final class DatabasePopulators {
 
 	static ResourceDatabasePopulator mySql() {
 		return new ResourceDatabasePopulator(
-				new ClassPathResource("org/springframework/session/jdbc/schema-mysql.sql"));
+	new ClassPathResource("org/springframework/session/jdbc/schema-mysql.sql"));
 	}
 
 	static ResourceDatabasePopulator oracle() {
 		return new ResourceDatabasePopulator(
-				new ClassPathResource("org/springframework/session/jdbc/schema-oracle.sql"));
+	new ClassPathResource("org/springframework/session/jdbc/schema-oracle.sql"));
 	}
 
 	static ResourceDatabasePopulator postgreSql() {
 		return new ResourceDatabasePopulator(
-				new ClassPathResource("org/springframework/session/jdbc/schema-postgresql.sql"));
+	new ClassPathResource("org/springframework/session/jdbc/schema-postgresql.sql"));
 	}
 
 	static ResourceDatabasePopulator sqlServer() {
 		return new ResourceDatabasePopulator(
-				new ClassPathResource("org/springframework/session/jdbc/schema-sqlserver.sql"));
+	new ClassPathResource("org/springframework/session/jdbc/schema-sqlserver.sql"));
 	}
 
 }

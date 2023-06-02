@@ -45,19 +45,19 @@ public abstract class AbstractClassLoaderTest<T> extends AbstractITest {
 	void verifyContainerClassLoaderLoadedIntoConverter() {
 
 		Field mongoSessionConverterField = ReflectionUtils.findField(this.sessionRepository.getClass(),
-				"mongoSessionConverter");
+	"mongoSessionConverter");
 		ReflectionUtils.makeAccessible(mongoSessionConverterField);
 		AbstractMongoSessionConverter sessionConverter = (AbstractMongoSessionConverter) ReflectionUtils
-				.getField(mongoSessionConverterField, this.sessionRepository);
+	.getField(mongoSessionConverterField, this.sessionRepository);
 
 		AssertionsForClassTypes.assertThat(sessionConverter).isInstanceOf(JdkMongoSessionConverter.class);
 
 		JdkMongoSessionConverter jdkMongoSessionConverter = (JdkMongoSessionConverter) sessionConverter;
 
 		DeserializingConverter deserializingConverter = (DeserializingConverter) extractField(
-				JdkMongoSessionConverter.class, "deserializer", jdkMongoSessionConverter);
+	JdkMongoSessionConverter.class, "deserializer", jdkMongoSessionConverter);
 		DefaultDeserializer deserializer = (DefaultDeserializer) extractField(DeserializingConverter.class,
-				"deserializer", deserializingConverter);
+	"deserializer", deserializingConverter);
 		ClassLoader classLoader = (ClassLoader) extractField(DefaultDeserializer.class, "classLoader", deserializer);
 
 		AssertionsForClassTypes.assertThat(classLoader).isEqualTo(this.applicationContext.getClassLoader());

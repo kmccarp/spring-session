@@ -132,12 +132,12 @@ public class SessionRepositoryFilter<S extends Session> extends OncePerRequestFi
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException {
+throws ServletException, IOException {
 		request.setAttribute(SESSION_REPOSITORY_ATTR, this.sessionRepository);
 
 		SessionRepositoryRequestWrapper wrappedRequest = new SessionRepositoryRequestWrapper(request, response);
 		SessionRepositoryResponseWrapper wrappedResponse = new SessionRepositoryResponseWrapper(wrappedRequest,
-				response);
+	response);
 
 		try {
 			filterChain.doFilter(wrappedRequest, wrappedResponse);
@@ -149,7 +149,7 @@ public class SessionRepositoryFilter<S extends Session> extends OncePerRequestFi
 
 	@Override
 	protected void doFilterNestedErrorDispatch(HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain) throws ServletException, IOException {
+FilterChain filterChain) throws ServletException, IOException {
 		doFilterInternal(request, response, filterChain);
 	}
 
@@ -254,7 +254,7 @@ public class SessionRepositoryFilter<S extends Session> extends OncePerRequestFi
 
 			if (session == null) {
 				throw new IllegalStateException(
-						"Cannot change session ID. There is no session associated with this request.");
+			"Cannot change session ID. There is no session associated with this request.");
 			}
 
 			return getCurrentSession().getSession().changeSessionId();
@@ -298,7 +298,7 @@ public class SessionRepositoryFilter<S extends Session> extends OncePerRequestFi
 				// request.getSession is invoked for the duration of this request
 				if (SESSION_LOGGER.isDebugEnabled()) {
 					SESSION_LOGGER.debug(
-							"No session found by id: Caching result for getSession(false) for this HttpServletRequest.");
+				"No session found by id: Caching result for getSession(false) for this HttpServletRequest.");
 				}
 				setAttribute(INVALID_SESSION_ID_ATTR, "true");
 			}
@@ -306,14 +306,14 @@ public class SessionRepositoryFilter<S extends Session> extends OncePerRequestFi
 				return null;
 			}
 			if (SessionRepositoryFilter.this.httpSessionIdResolver instanceof CookieHttpSessionIdResolver
-					&& this.response.isCommitted()) {
+		&& this.response.isCommitted()) {
 				throw new IllegalStateException("Cannot create a session after the response has been committed");
 			}
 			if (SESSION_LOGGER.isDebugEnabled()) {
 				SESSION_LOGGER.debug(
-						"A new session was created. To help you troubleshoot where the session was created we provided a StackTrace (this is not an error). You can prevent this from appearing by disabling DEBUG logging for "
-								+ SESSION_LOGGER_NAME,
-						new RuntimeException("For debugging purposes only (not an error)"));
+			"A new session was created. To help you troubleshoot where the session was created we provided a StackTrace (this is not an error). You can prevent this from appearing by disabling DEBUG logging for "
+		+ SESSION_LOGGER_NAME,
+			new RuntimeException("For debugging purposes only (not an error)"));
 			}
 			S session = SessionRepositoryFilter.this.sessionRepository.createSession();
 			session.setLastAccessedTime(Instant.now());

@@ -53,8 +53,7 @@ import org.springframework.util.Assert;
  */
 @Configuration(proxyBeanMethods = false)
 @Import(SpringHttpSessionConfiguration.class)
-public abstract class AbstractRedisHttpSessionConfiguration<T extends SessionRepository<? extends Session>>
-		implements BeanClassLoaderAware {
+public abstract class AbstractRedisHttpSessionConfiguration<T extends SessionRepository<? extends Session>>implements BeanClassLoaderAware {
 
 	private Duration maxInactiveInterval = MapSession.DEFAULT_MAX_INACTIVE_INTERVAL;
 
@@ -116,10 +115,10 @@ public abstract class AbstractRedisHttpSessionConfiguration<T extends SessionRep
 
 	@Autowired
 	public void setRedisConnectionFactory(
-			@SpringSessionRedisConnectionFactory ObjectProvider<RedisConnectionFactory> springSessionRedisConnectionFactory,
-			ObjectProvider<RedisConnectionFactory> redisConnectionFactory) {
+@SpringSessionRedisConnectionFactory ObjectProvider<RedisConnectionFactory> springSessionRedisConnectionFactory,
+ObjectProvider<RedisConnectionFactory> redisConnectionFactory) {
 		this.redisConnectionFactory = springSessionRedisConnectionFactory
-				.getIfAvailable(redisConnectionFactory::getObject);
+	.getIfAvailable(redisConnectionFactory::getObject);
 	}
 
 	protected RedisConnectionFactory getRedisConnectionFactory() {
@@ -138,7 +137,7 @@ public abstract class AbstractRedisHttpSessionConfiguration<T extends SessionRep
 
 	@Autowired(required = false)
 	public void setSessionRepositoryCustomizer(
-			ObjectProvider<SessionRepositoryCustomizer<T>> sessionRepositoryCustomizers) {
+ObjectProvider<SessionRepositoryCustomizer<T>> sessionRepositoryCustomizers) {
 		this.sessionRepositoryCustomizers = sessionRepositoryCustomizers.orderedStream().collect(Collectors.toList());
 	}
 

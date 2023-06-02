@@ -41,9 +41,9 @@ class JdbcSchemaUtilsTests {
 		Resource newTableNameSchema = JdbcSchemaUtils.replaceDefaultTableName(schema, "NEW_TABLE_NAME");
 		String schemaScript = new String(newTableNameSchema.getInputStream().readAllBytes());
 		assertThat(schemaScript).doesNotContain("SPRING_SESSION", "SPRING_SESSION_ATTRIBUTES", "SPRING_SESSION_IX1",
-				"SPRING_SESSION_IX2", "SPRING_SESSION_IX3");
+	"SPRING_SESSION_IX2", "SPRING_SESSION_IX3");
 		assertThat(schemaScript).contains("NEW_TABLE_NAME", "NEW_TABLE_NAME_ATTRIBUTES", "NEW_TABLE_NAME_IX1",
-				"NEW_TABLE_NAME_IX2", "NEW_TABLE_NAME_IX3");
+	"NEW_TABLE_NAME_IX2", "NEW_TABLE_NAME_IX3");
 	}
 
 	@ParameterizedTest
@@ -65,7 +65,7 @@ class JdbcSchemaUtilsTests {
 
 	private static Stream<Resource> getSchemaFiles() throws IOException {
 		return Arrays.stream(new PathMatchingResourcePatternResolver()
-				.getResources("classpath*:org/springframework/session/jdbc/schema-*.sql"));
+	.getResources("classpath*:org/springframework/session/jdbc/schema-*.sql"));
 	}
 
 }

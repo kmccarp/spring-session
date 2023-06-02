@@ -42,7 +42,7 @@ public class SpringSessionRememberMeServices implements RememberMeServices, Logo
 	 * Remember-me login request attribute name.
 	 */
 	public static final String REMEMBER_ME_LOGIN_ATTR = SpringSessionRememberMeServices.class.getName()
-			+ "REMEMBER_ME_LOGIN_ATTR";
++ "REMEMBER_ME_LOGIN_ATTR";
 
 	private static final String DEFAULT_REMEMBERME_PARAMETER = "remember-me";
 
@@ -68,7 +68,7 @@ public class SpringSessionRememberMeServices implements RememberMeServices, Logo
 
 	@Override
 	public final void loginSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication successfulAuthentication) {
+Authentication successfulAuthentication) {
 		if (!this.alwaysRemember && !rememberMeRequested(request, this.rememberMeParameterName)) {
 			logger.debug("Remember-me login not requested.");
 			return;
@@ -91,7 +91,7 @@ public class SpringSessionRememberMeServices implements RememberMeServices, Logo
 		String rememberMe = request.getParameter(parameter);
 		if (rememberMe != null) {
 			if (rememberMe.equalsIgnoreCase("true") || rememberMe.equalsIgnoreCase("on")
-					|| rememberMe.equalsIgnoreCase("yes") || rememberMe.equals("1")) {
+		|| rememberMe.equalsIgnoreCase("yes") || rememberMe.equals("1")) {
 				return true;
 			}
 		}

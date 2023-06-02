@@ -62,9 +62,7 @@ import org.springframework.util.StringValueResolver;
  * @see EnableRedisIndexedHttpSession
  */
 @Configuration(proxyBeanMethods = false)
-public class RedisIndexedHttpSessionConfiguration
-		extends AbstractRedisHttpSessionConfiguration<RedisIndexedSessionRepository>
-		implements EmbeddedValueResolverAware, ImportAware {
+public class RedisIndexedHttpSessionConfigurationextends AbstractRedisHttpSessionConfiguration<RedisIndexedSessionRepository>implements EmbeddedValueResolverAware, ImportAware {
 
 	private String cleanupCron = RedisIndexedSessionRepository.DEFAULT_CLEANUP_CRON;
 
@@ -102,13 +100,13 @@ public class RedisIndexedHttpSessionConfiguration
 		int database = resolveDatabase();
 		sessionRepository.setDatabase(database);
 		getSessionRepositoryCustomizers()
-				.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(sessionRepository));
+	.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(sessionRepository));
 		return sessionRepository;
 	}
 
 	@Bean
 	public RedisMessageListenerContainer springSessionRedisMessageListenerContainer(
-			RedisIndexedSessionRepository sessionRepository) {
+RedisIndexedSessionRepository sessionRepository) {
 		RedisMessageListenerContainer container = new RedisMessageListenerContainer();
 		container.setConnectionFactory(getRedisConnectionFactory());
 		if (this.redisTaskExecutor != null) {
@@ -118,10 +116,10 @@ public class RedisIndexedHttpSessionConfiguration
 			container.setSubscriptionExecutor(this.redisSubscriptionExecutor);
 		}
 		container.addMessageListener(sessionRepository,
-				Arrays.asList(new ChannelTopic(sessionRepository.getSessionDeletedChannel()),
-						new ChannelTopic(sessionRepository.getSessionExpiredChannel())));
+	Arrays.asList(new ChannelTopic(sessionRepository.getSessionDeletedChannel()),
+new ChannelTopic(sessionRepository.getSessionExpiredChannel())));
 		container.addMessageListener(sessionRepository,
-				Collections.singletonList(new PatternTopic(sessionRepository.getSessionCreatedChannelPrefix() + "*")));
+	Collections.singletonList(new PatternTopic(sessionRepository.getSessionCreatedChannelPrefix() + "*")));
 		return container;
 	}
 
@@ -174,7 +172,7 @@ public class RedisIndexedHttpSessionConfiguration
 	@Override
 	public void setImportMetadata(AnnotationMetadata importMetadata) {
 		Map<String, Object> attributeMap = importMetadata
-				.getAnnotationAttributes(EnableRedisIndexedHttpSession.class.getName());
+	.getAnnotationAttributes(EnableRedisIndexedHttpSession.class.getName());
 		AnnotationAttributes attributes = AnnotationAttributes.fromMap(attributeMap);
 		if (attributes == null) {
 			return;
@@ -194,11 +192,11 @@ public class RedisIndexedHttpSessionConfiguration
 
 	private int resolveDatabase() {
 		if (ClassUtils.isPresent("io.lettuce.core.RedisClient", null)
-				&& getRedisConnectionFactory() instanceof LettuceConnectionFactory) {
+	&& getRedisConnectionFactory() instanceof LettuceConnectionFactory) {
 			return ((LettuceConnectionFactory) getRedisConnectionFactory()).getDatabase();
 		}
 		if (ClassUtils.isPresent("redis.clients.jedis.Jedis", null)
-				&& getRedisConnectionFactory() instanceof JedisConnectionFactory) {
+	&& getRedisConnectionFactory() instanceof JedisConnectionFactory) {
 			return ((JedisConnectionFactory) getRedisConnectionFactory()).getDatabase();
 		}
 		return RedisIndexedSessionRepository.DEFAULT_DATABASE;
@@ -218,7 +216,7 @@ public class RedisIndexedHttpSessionConfiguration
 		private final ConfigureRedisAction configure;
 
 		EnableRedisKeyspaceNotificationsInitializer(RedisConnectionFactory connectionFactory,
-				ConfigureRedisAction configure) {
+	ConfigureRedisAction configure) {
 			this.connectionFactory = connectionFactory;
 			this.configure = configure;
 		}

@@ -182,12 +182,12 @@ public class RedisSessionRepository implements SessionRepository<RedisSessionRep
 			if (this.isNew) {
 				this.delta.put(RedisSessionMapper.CREATION_TIME_KEY, cached.getCreationTime().toEpochMilli());
 				this.delta.put(RedisSessionMapper.MAX_INACTIVE_INTERVAL_KEY,
-						(int) cached.getMaxInactiveInterval().getSeconds());
+			(int) cached.getMaxInactiveInterval().getSeconds());
 				this.delta.put(RedisSessionMapper.LAST_ACCESSED_TIME_KEY, cached.getLastAccessedTime().toEpochMilli());
 			}
 			if (this.isNew || (RedisSessionRepository.this.saveMode == SaveMode.ALWAYS)) {
 				getAttributeNames().forEach((attributeName) -> this.delta.put(getAttributeKey(attributeName),
-						cached.getAttribute(attributeName)));
+			cached.getAttribute(attributeName)));
 			}
 		}
 
@@ -297,8 +297,8 @@ public class RedisSessionRepository implements SessionRepository<RedisSessionRep
 			String key = getSessionKey(getId());
 			RedisSessionRepository.this.sessionRedisOperations.opsForHash().putAll(key, new HashMap<>(this.delta));
 			RedisSessionRepository.this.sessionRedisOperations.expireAt(key,
-					Instant.ofEpochMilli(getLastAccessedTime().toEpochMilli())
-							.plusSeconds(getMaxInactiveInterval().getSeconds()));
+		Instant.ofEpochMilli(getLastAccessedTime().toEpochMilli())
+	.plusSeconds(getMaxInactiveInterval().getSeconds()));
 			this.delta.clear();
 		}
 

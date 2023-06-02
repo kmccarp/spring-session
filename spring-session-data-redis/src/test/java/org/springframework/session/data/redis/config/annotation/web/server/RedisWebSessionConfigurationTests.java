@@ -85,10 +85,10 @@ class RedisWebSessionConfigurationTests {
 		ReactiveRedisSessionRepository repository = this.context.getBean(ReactiveRedisSessionRepository.class);
 		assertThat(repository).isNotNull();
 		ReactiveRedisOperations<String, Object> springSessionRedisOperations = this.context
-				.getBean(SpringSessionRedisOperationsResolvingConfig.class).getSpringSessionRedisOperations();
+	.getBean(SpringSessionRedisOperationsResolvingConfig.class).getSpringSessionRedisOperations();
 		assertThat(springSessionRedisOperations).isNotNull();
 		assertThat((ReactiveRedisOperations) ReflectionTestUtils.getField(repository, "sessionRedisOperations"))
-				.isEqualTo(springSessionRedisOperations);
+	.isEqualTo(springSessionRedisOperations);
 	}
 
 	@Test
@@ -106,21 +106,21 @@ class RedisWebSessionConfigurationTests {
 
 		ReactiveRedisSessionRepository repository = this.context.getBean(ReactiveRedisSessionRepository.class);
 		assertThat(repository).extracting("defaultMaxInactiveInterval")
-				.isEqualTo(Duration.ofSeconds(MAX_INACTIVE_INTERVAL_IN_SECONDS));
+	.isEqualTo(Duration.ofSeconds(MAX_INACTIVE_INTERVAL_IN_SECONDS));
 	}
 
 	@Test
 	void customSaveModeAnnotation() {
 		registerAndRefresh(RedisConfig.class, CustomSaveModeExpressionAnnotationConfiguration.class);
 		assertThat(this.context.getBean(ReactiveRedisSessionRepository.class)).hasFieldOrPropertyWithValue("saveMode",
-				SaveMode.ALWAYS);
+	SaveMode.ALWAYS);
 	}
 
 	@Test
 	void customSaveModeSetter() {
 		registerAndRefresh(RedisConfig.class, CustomSaveModeExpressionSetterConfiguration.class);
 		assertThat(this.context.getBean(ReactiveRedisSessionRepository.class)).hasFieldOrPropertyWithValue("saveMode",
-				SaveMode.ALWAYS);
+	SaveMode.ALWAYS);
 	}
 
 	@Test
@@ -129,14 +129,14 @@ class RedisWebSessionConfigurationTests {
 
 		ReactiveRedisSessionRepository repository = this.context.getBean(ReactiveRedisSessionRepository.class);
 		ReactiveRedisConnectionFactory redisConnectionFactory = this.context.getBean("qualifiedRedisConnectionFactory",
-				ReactiveRedisConnectionFactory.class);
+	ReactiveRedisConnectionFactory.class);
 		assertThat(repository).isNotNull();
 		assertThat(redisConnectionFactory).isNotNull();
 		ReactiveRedisOperations redisOperations = (ReactiveRedisOperations) ReflectionTestUtils.getField(repository,
-				"sessionRedisOperations");
+	"sessionRedisOperations");
 		assertThat(redisOperations).isNotNull();
 		assertThat(ReflectionTestUtils.getField(redisOperations, "connectionFactory"))
-				.isEqualTo(redisConnectionFactory);
+	.isEqualTo(redisConnectionFactory);
 	}
 
 	@Test
@@ -145,14 +145,14 @@ class RedisWebSessionConfigurationTests {
 
 		ReactiveRedisSessionRepository repository = this.context.getBean(ReactiveRedisSessionRepository.class);
 		ReactiveRedisConnectionFactory redisConnectionFactory = this.context.getBean("primaryRedisConnectionFactory",
-				ReactiveRedisConnectionFactory.class);
+	ReactiveRedisConnectionFactory.class);
 		assertThat(repository).isNotNull();
 		assertThat(redisConnectionFactory).isNotNull();
 		ReactiveRedisOperations redisOperations = (ReactiveRedisOperations) ReflectionTestUtils.getField(repository,
-				"sessionRedisOperations");
+	"sessionRedisOperations");
 		assertThat(redisOperations).isNotNull();
 		assertThat(ReflectionTestUtils.getField(redisOperations, "connectionFactory"))
-				.isEqualTo(redisConnectionFactory);
+	.isEqualTo(redisConnectionFactory);
 	}
 
 	@Test
@@ -161,14 +161,14 @@ class RedisWebSessionConfigurationTests {
 
 		ReactiveRedisSessionRepository repository = this.context.getBean(ReactiveRedisSessionRepository.class);
 		ReactiveRedisConnectionFactory redisConnectionFactory = this.context.getBean("qualifiedRedisConnectionFactory",
-				ReactiveRedisConnectionFactory.class);
+	ReactiveRedisConnectionFactory.class);
 		assertThat(repository).isNotNull();
 		assertThat(redisConnectionFactory).isNotNull();
 		ReactiveRedisOperations redisOperations = (ReactiveRedisOperations) ReflectionTestUtils.getField(repository,
-				"sessionRedisOperations");
+	"sessionRedisOperations");
 		assertThat(redisOperations).isNotNull();
 		assertThat(ReflectionTestUtils.getField(redisOperations, "connectionFactory"))
-				.isEqualTo(redisConnectionFactory);
+	.isEqualTo(redisConnectionFactory);
 	}
 
 	@Test
@@ -177,22 +177,22 @@ class RedisWebSessionConfigurationTests {
 
 		ReactiveRedisSessionRepository repository = this.context.getBean(ReactiveRedisSessionRepository.class);
 		ReactiveRedisConnectionFactory redisConnectionFactory = this.context.getBean("redisConnectionFactory",
-				ReactiveRedisConnectionFactory.class);
+	ReactiveRedisConnectionFactory.class);
 		assertThat(repository).isNotNull();
 		assertThat(redisConnectionFactory).isNotNull();
 		ReactiveRedisOperations redisOperations = (ReactiveRedisOperations) ReflectionTestUtils.getField(repository,
-				"sessionRedisOperations");
+	"sessionRedisOperations");
 		assertThat(redisOperations).isNotNull();
 		assertThat(ReflectionTestUtils.getField(redisOperations, "connectionFactory"))
-				.isEqualTo(redisConnectionFactory);
+	.isEqualTo(redisConnectionFactory);
 	}
 
 	@Test
 	void multipleConnectionFactoryRedisConfig() {
 		assertThatExceptionOfType(BeanCreationException.class)
-				.isThrownBy(() -> registerAndRefresh(RedisConfig.class, MultipleConnectionFactoryRedisConfig.class))
-				.havingRootCause().isInstanceOf(NoUniqueBeanDefinitionException.class)
-				.withMessageContaining("expected single matching bean but found 2");
+	.isThrownBy(() -> registerAndRefresh(RedisConfig.class, MultipleConnectionFactoryRedisConfig.class))
+	.havingRootCause().isInstanceOf(NoUniqueBeanDefinitionException.class)
+	.withMessageContaining("expected single matching bean but found 2");
 	}
 
 	@Test
@@ -202,21 +202,21 @@ class RedisWebSessionConfigurationTests {
 		ReactiveRedisSessionRepository repository = this.context.getBean(ReactiveRedisSessionRepository.class);
 		@SuppressWarnings("unchecked")
 		RedisSerializer<Object> redisSerializer = this.context.getBean("springSessionDefaultRedisSerializer",
-				RedisSerializer.class);
+	RedisSerializer.class);
 		assertThat(repository).isNotNull();
 		assertThat(redisSerializer).isNotNull();
 		ReactiveRedisOperations redisOperations = (ReactiveRedisOperations) ReflectionTestUtils.getField(repository,
-				"sessionRedisOperations");
+	"sessionRedisOperations");
 		assertThat(redisOperations).isNotNull();
 		RedisSerializationContext serializationContext = redisOperations.getSerializationContext();
 		assertThat(ReflectionTestUtils.getField(serializationContext.getValueSerializationPair().getReader(),
-				"serializer")).isEqualTo(redisSerializer);
+	"serializer")).isEqualTo(redisSerializer);
 		assertThat(ReflectionTestUtils.getField(serializationContext.getValueSerializationPair().getWriter(),
-				"serializer")).isEqualTo(redisSerializer);
+	"serializer")).isEqualTo(redisSerializer);
 		assertThat(ReflectionTestUtils.getField(serializationContext.getHashValueSerializationPair().getReader(),
-				"serializer")).isEqualTo(redisSerializer);
+	"serializer")).isEqualTo(redisSerializer);
 		assertThat(ReflectionTestUtils.getField(serializationContext.getHashValueSerializationPair().getWriter(),
-				"serializer")).isEqualTo(redisSerializer);
+	"serializer")).isEqualTo(redisSerializer);
 	}
 
 	@Test
@@ -224,7 +224,7 @@ class RedisWebSessionConfigurationTests {
 		registerAndRefresh(RedisConfig.class, SessionRepositoryCustomizerConfiguration.class);
 		ReactiveRedisSessionRepository sessionRepository = this.context.getBean(ReactiveRedisSessionRepository.class);
 		assertThat(sessionRepository).extracting("defaultMaxInactiveInterval")
-				.isEqualTo(Duration.ofSeconds(MAX_INACTIVE_INTERVAL_IN_SECONDS));
+	.isEqualTo(Duration.ofSeconds(MAX_INACTIVE_INTERVAL_IN_SECONDS));
 	}
 
 	@Test
@@ -385,7 +385,7 @@ class RedisWebSessionConfigurationTests {
 		@Order(1)
 		ReactiveSessionRepositoryCustomizer<ReactiveRedisSessionRepository> sessionRepositoryCustomizerTwo() {
 			return (sessionRepository) -> sessionRepository
-					.setDefaultMaxInactiveInterval(Duration.ofSeconds(MAX_INACTIVE_INTERVAL_IN_SECONDS));
+		.setDefaultMaxInactiveInterval(Duration.ofSeconds(MAX_INACTIVE_INTERVAL_IN_SECONDS));
 		}
 
 	}

@@ -38,8 +38,7 @@ import org.springframework.web.context.ServletContextAware;
  * @author Rob Winch
  * @since 1.1
  */
-public class SessionEventHttpSessionListenerAdapter
-		implements ApplicationListener<AbstractSessionEvent>, ServletContextAware {
+public class SessionEventHttpSessionListenerAdapterimplements ApplicationListener<AbstractSessionEvent>, ServletContextAware {
 
 	private final List<HttpSessionListener> listeners;
 

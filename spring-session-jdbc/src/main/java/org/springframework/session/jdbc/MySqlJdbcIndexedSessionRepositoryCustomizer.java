@@ -25,8 +25,7 @@ import org.springframework.session.config.SessionRepositoryCustomizer;
  * @author Vedran Pavic
  * @since 2.5.0
  */
-public class MySqlJdbcIndexedSessionRepositoryCustomizer
-		implements SessionRepositoryCustomizer<JdbcIndexedSessionRepository> {
+public class MySqlJdbcIndexedSessionRepositoryCustomizerimplements SessionRepositoryCustomizer<JdbcIndexedSessionRepository> {
 
 	private static final String CREATE_SESSION_ATTRIBUTE_QUERY = """
 			INSERT INTO %TABLE_NAME%_ATTRIBUTES (SESSION_PRIMARY_ID, ATTRIBUTE_NAME, ATTRIBUTE_BYTES)

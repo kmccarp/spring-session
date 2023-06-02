@@ -31,7 +31,7 @@ public class HomeController {
 
 	@RequestMapping("/setValue")
 	public String setValue(@RequestParam(name = "key", required = false) String key,
-			@RequestParam(name = "value", required = false) String value, HttpServletRequest request) {
+@RequestParam(name = "value", required = false) String value, HttpServletRequest request) {
 		if (!ObjectUtils.isEmpty(key) && !ObjectUtils.isEmpty(value)) {
 			request.getSession().setAttribute(key, value);
 		}

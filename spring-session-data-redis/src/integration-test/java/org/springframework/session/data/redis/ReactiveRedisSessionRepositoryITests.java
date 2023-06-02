@@ -62,7 +62,7 @@ class ReactiveRedisSessionRepositoryITests extends AbstractRedisITests {
 		assertThat(session.getId()).isEqualTo(toSave.getId());
 		assertThat(session.getAttributeNames()).isEqualTo(toSave.getAttributeNames());
 		assertThat(session.<String>getAttribute(expectedAttributeName))
-				.isEqualTo(toSave.getAttribute(expectedAttributeName));
+	.isEqualTo(toSave.getAttribute(expectedAttributeName));
 
 		this.repository.deleteById(toSave.getId()).block();
 
@@ -209,7 +209,7 @@ class ReactiveRedisSessionRepositoryITests extends AbstractRedisITests {
 		toSave.setLastAccessedTime(Instant.now());
 
 		assertThatIllegalStateException().isThrownBy(() -> this.repository.save(toSave).block())
-				.withMessage("Session was invalidated");
+	.withMessage("Session was invalidated");
 
 		assertThat(this.repository.findById(sessionId).block()).isNull();
 		assertThat(this.repository.findById(session.getId()).block()).isNotNull();

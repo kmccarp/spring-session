@@ -59,7 +59,7 @@ final class RedisSessionExpirationPolicy {
 	private final Function<String, String> lookupSessionKey;
 
 	RedisSessionExpirationPolicy(RedisOperations<String, Object> sessionRedisOperations,
-			Function<Long, String> lookupExpirationKey, Function<String, String> lookupSessionKey) {
+Function<Long, String> lookupExpirationKey, Function<String, String> lookupSessionKey) {
 		super();
 		this.redis = sessionRedisOperations;
 		this.lookupExpirationKey = lookupExpirationKey;

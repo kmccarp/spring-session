@@ -116,7 +116,7 @@ public class JdbcHttpSessionConfiguration implements BeanClassLoaderAware, Embed
 			this.transactionOperations = createTransactionTemplate(this.transactionManager);
 		}
 		JdbcIndexedSessionRepository sessionRepository = new JdbcIndexedSessionRepository(jdbcTemplate,
-				this.transactionOperations);
+	this.transactionOperations);
 		if (StringUtils.hasText(this.tableName)) {
 			sessionRepository.setTableName(this.tableName);
 		}
@@ -145,14 +145,14 @@ public class JdbcHttpSessionConfiguration implements BeanClassLoaderAware, Embed
 			sessionRepository.setConversionService(createConversionServiceWithBeanClassLoader(this.classLoader));
 		}
 		this.sessionRepositoryCustomizers
-				.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(sessionRepository));
+	.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(sessionRepository));
 		return sessionRepository;
 	}
 
 	private static boolean requiresTemporaryLob(DataSource dataSource) {
 		try {
 			String productName = JdbcUtils.extractDatabaseMetaData(dataSource,
-					DatabaseMetaData::getDatabaseProductName);
+		DatabaseMetaData::getDatabaseProductName);
 			return "Oracle".equalsIgnoreCase(JdbcUtils.commonDatabaseName(productName));
 		}
 		catch (MetaDataAccessException ex) {
@@ -187,7 +187,7 @@ public class JdbcHttpSessionConfiguration implements BeanClassLoaderAware, Embed
 
 	@Autowired
 	public void setDataSource(@SpringSessionDataSource ObjectProvider<DataSource> springSessionDataSource,
-			ObjectProvider<DataSource> dataSource) {
+ObjectProvider<DataSource> dataSource) {
 		DataSource dataSourceToUse = springSessionDataSource.getIfAvailable();
 		if (dataSourceToUse == null) {
 			dataSourceToUse = dataSource.getObject();
@@ -231,7 +231,7 @@ public class JdbcHttpSessionConfiguration implements BeanClassLoaderAware, Embed
 
 	@Autowired(required = false)
 	public void setSessionRepositoryCustomizer(
-			ObjectProvider<SessionRepositoryCustomizer<JdbcIndexedSessionRepository>> sessionRepositoryCustomizers) {
+ObjectProvider<SessionRepositoryCustomizer<JdbcIndexedSessionRepository>> sessionRepositoryCustomizers) {
 		this.sessionRepositoryCustomizers = sessionRepositoryCustomizers.orderedStream().collect(Collectors.toList());
 	}
 
@@ -248,7 +248,7 @@ public class JdbcHttpSessionConfiguration implements BeanClassLoaderAware, Embed
 	@Override
 	public void setImportMetadata(AnnotationMetadata importMetadata) {
 		Map<String, Object> attributeMap = importMetadata
-				.getAnnotationAttributes(EnableJdbcHttpSession.class.getName());
+	.getAnnotationAttributes(EnableJdbcHttpSession.class.getName());
 		AnnotationAttributes attributes = AnnotationAttributes.fromMap(attributeMap);
 		if (attributes == null) {
 			return;

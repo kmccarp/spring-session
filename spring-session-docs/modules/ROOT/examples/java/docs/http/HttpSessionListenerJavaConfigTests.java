@@ -25,7 +25,7 @@ import org.springframework.test.context.ContextConfiguration;
  * @author Rob Winch
  *
  */
-@ContextConfiguration(classes = { HttpSessionListenerJavaConfigTests.MockConfig.class, RedisHttpSessionConfig.class })
+@ContextConfiguration(classes = {HttpSessionListenerJavaConfigTests.MockConfig.class, RedisHttpSessionConfig.class})
 class HttpSessionListenerJavaConfigTests extends AbstractHttpSessionListenerTests {
 
 	@Configuration

@@ -110,7 +110,7 @@ public class SpringHttpSessionConfiguration implements InitializingBean, Applica
 	@Override
 	public void afterPropertiesSet() {
 		CookieSerializer cookieSerializer = (this.cookieSerializer != null) ? this.cookieSerializer
-				: createDefaultCookieSerializer();
+	: createDefaultCookieSerializer();
 		this.defaultHttpSessionIdResolver.setCookieSerializer(cookieSerializer);
 	}
 
@@ -121,7 +121,7 @@ public class SpringHttpSessionConfiguration implements InitializingBean, Applica
 
 	@Bean
 	public <S extends Session> SessionRepositoryFilter<? extends Session> springSessionRepositoryFilter(
-			SessionRepository<S> sessionRepository) {
+SessionRepository<S> sessionRepository) {
 		SessionRepositoryFilter<S> sessionRepositoryFilter = new SessionRepositoryFilter<>(sessionRepository);
 		sessionRepositoryFilter.setHttpSessionIdResolver(this.httpSessionIdResolver);
 		return sessionRepositoryFilter;
@@ -131,7 +131,7 @@ public class SpringHttpSessionConfiguration implements InitializingBean, Applica
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		if (ClassUtils.isPresent("org.springframework.security.web.authentication.RememberMeServices", null)) {
 			this.usesSpringSessionRememberMeServices = !ObjectUtils
-					.isEmpty(applicationContext.getBeanNamesForType(SpringSessionRememberMeServices.class));
+		.isEmpty(applicationContext.getBeanNamesForType(SpringSessionRememberMeServices.class));
 		}
 	}
 

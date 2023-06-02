@@ -25,8 +25,7 @@ import org.springframework.session.config.SessionRepositoryCustomizer;
  * @author Vedran Pavic
  * @since 2.5.0
  */
-public class OracleJdbcIndexedSessionRepositoryCustomizer
-		implements SessionRepositoryCustomizer<JdbcIndexedSessionRepository> {
+public class OracleJdbcIndexedSessionRepositoryCustomizerimplements SessionRepositoryCustomizer<JdbcIndexedSessionRepository> {
 
 	private static final String CREATE_SESSION_ATTRIBUTE_QUERY = """
 			MERGE INTO %TABLE_NAME%_ATTRIBUTES SA

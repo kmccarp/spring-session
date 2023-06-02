@@ -132,7 +132,7 @@ public class DefaultCookieSerializer implements CookieSerializer {
 		if (maxAge > -1) {
 			sb.append("; Max-Age=").append(cookieValue.getCookieMaxAge());
 			ZonedDateTime expires = (maxAge != 0) ? ZonedDateTime.now(this.clock).plusSeconds(maxAge)
-					: Instant.EPOCH.atZone(ZoneOffset.UTC);
+		: Instant.EPOCH.atZone(ZoneOffset.UTC);
 			sb.append("; Expires=").append(expires.format(DateTimeFormatter.RFC_1123_DATE_TIME));
 		}
 		String domain = getDomainName(request);
@@ -217,7 +217,7 @@ public class DefaultCookieSerializer implements CookieSerializer {
 		int maxAge = cookieValue.getCookieMaxAge();
 		if (maxAge < 0) {
 			if (this.rememberMeRequestAttribute != null
-					&& cookieValue.getRequest().getAttribute(this.rememberMeRequestAttribute) != null) {
+		&& cookieValue.getRequest().getAttribute(this.rememberMeRequestAttribute) != null) {
 				// the cookie is only written at time of session creation, so we rely on
 				// session expiration rather than cookie expiration if remember me is
 				// enabled
@@ -239,7 +239,7 @@ public class DefaultCookieSerializer implements CookieSerializer {
 			prev = cur;
 			cur = chars[i];
 			if (!domainValid.get(cur) || ((prev == '.' || prev == -1) && (cur == '.' || cur == '-'))
-					|| (prev == '-' && cur == '.')) {
+		|| (prev == '-' && cur == '.')) {
 				throw new IllegalArgumentException("Invalid cookie domain: " + domain);
 			}
 			i++;

@@ -63,7 +63,7 @@ class EnableRedisKeyspaceNotificationsInitializerTests {
 		given(this.connection.serverCommands()).willReturn(this.commands);
 
 		this.initializer = new RedisIndexedHttpSessionConfiguration.EnableRedisKeyspaceNotificationsInitializer(
-				this.connectionFactory, new ConfigureNotifyKeyspaceEventsAction());
+	this.connectionFactory, new ConfigureNotifyKeyspaceEventsAction());
 	}
 
 	@Test

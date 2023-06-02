@@ -54,8 +54,7 @@ import org.springframework.util.StringValueResolver;
  */
 @Configuration(proxyBeanMethods = false)
 @Import(SpringWebSessionConfiguration.class)
-public class ReactiveMongoWebSessionConfiguration
-		implements BeanClassLoaderAware, EmbeddedValueResolverAware, ImportAware {
+public class ReactiveMongoWebSessionConfigurationimplements BeanClassLoaderAware, EmbeddedValueResolverAware, ImportAware {
 
 	private AbstractMongoSessionConverter mongoSessionConverter;
 
@@ -89,8 +88,8 @@ public class ReactiveMongoWebSessionConfiguration
 		}
 		else {
 			JdkMongoSessionConverter mongoSessionConverter = new JdkMongoSessionConverter(new SerializingConverter(),
-					new DeserializingConverter(this.classLoader),
-					Duration.ofSeconds(MapSession.DEFAULT_MAX_INACTIVE_INTERVAL_SECONDS));
+		new DeserializingConverter(this.classLoader),
+		Duration.ofSeconds(MapSession.DEFAULT_MAX_INACTIVE_INTERVAL_SECONDS));
 
 			if (this.indexResolver != null) {
 				mongoSessionConverter.setIndexResolver(this.indexResolver);
@@ -110,7 +109,7 @@ public class ReactiveMongoWebSessionConfiguration
 		}
 
 		this.sessionRepositoryCustomizers
-				.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(repository));
+	.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(repository));
 
 		return repository;
 	}
@@ -124,11 +123,11 @@ public class ReactiveMongoWebSessionConfiguration
 	public void setImportMetadata(AnnotationMetadata importMetadata) {
 
 		AnnotationAttributes attributes = AnnotationAttributes
-				.fromMap(importMetadata.getAnnotationAttributes(EnableMongoWebSession.class.getName()));
+	.fromMap(importMetadata.getAnnotationAttributes(EnableMongoWebSession.class.getName()));
 
 		if (attributes != null) {
 			this.maxInactiveInterval = Duration
-					.ofSeconds(attributes.<Integer>getNumber("maxInactiveIntervalInSeconds"));
+		.ofSeconds(attributes.<Integer>getNumber("maxInactiveIntervalInSeconds"));
 		}
 
 		String collectionNameValue = (attributes != null) ? attributes.getString("collectionName") : "";
@@ -171,7 +170,7 @@ public class ReactiveMongoWebSessionConfiguration
 
 	@Autowired(required = false)
 	public void setSessionRepositoryCustomizers(
-			ObjectProvider<ReactiveSessionRepositoryCustomizer<ReactiveMongoSessionRepository>> sessionRepositoryCustomizers) {
+ObjectProvider<ReactiveSessionRepositoryCustomizer<ReactiveMongoSessionRepository>> sessionRepositoryCustomizers) {
 		this.sessionRepositoryCustomizers = sessionRepositoryCustomizers.orderedStream().collect(Collectors.toList());
 	}
 

@@ -95,9 +95,9 @@ public class ReactiveMongoWebSessionConfigurationTest {
 		this.context.register(BadConfig.class);
 
 		assertThatExceptionOfType(UnsatisfiedDependencyException.class).isThrownBy(this.context::refresh)
-				.withMessageContaining("Error creating bean with name 'reactiveMongoSessionRepository'")
-				.withMessageContaining(
-						"No qualifying bean of type '" + ReactiveMongoOperations.class.getCanonicalName());
+	.withMessageContaining("Error creating bean with name 'reactiveMongoSessionRepository'")
+	.withMessageContaining(
+"No qualifying bean of type '" + ReactiveMongoOperations.class.getCanonicalName());
 	}
 
 	@Test
@@ -194,7 +194,7 @@ public class ReactiveMongoWebSessionConfigurationTest {
 		assertThat(repository).isNotNull();
 		assertThat(indexResolver).isNotNull();
 		assertThat(repository).extracting("mongoSessionConverter").hasFieldOrPropertyWithValue("indexResolver",
-				indexResolver);
+	indexResolver);
 	}
 
 	@Test
@@ -210,7 +210,7 @@ public class ReactiveMongoWebSessionConfigurationTest {
 		assertThat(repository).isNotNull();
 		assertThat(indexResolver).isNotNull();
 		assertThat(repository).extracting("mongoSessionConverter").hasFieldOrPropertyWithValue("indexResolver",
-				indexResolver);
+	indexResolver);
 	}
 
 	@Test

@@ -49,9 +49,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 class ClientServerHazelcastIndexedSessionRepositoryITests extends AbstractHazelcastIndexedSessionRepositoryITests {
 
 	private static GenericContainer container = new GenericContainer<>("hazelcast/hazelcast:5.0.3-slim")
-			.withExposedPorts(5701).withCopyFileToContainer(MountableFile.forClasspathResource("/hazelcast-server.xml"),
-					"/opt/hazelcast/hazelcast.xml")
-			.withEnv("HAZELCAST_CONFIG", "hazelcast.xml");
+.withExposedPorts(5701).withCopyFileToContainer(MountableFile.forClasspathResource("/hazelcast-server.xml"),
+"/opt/hazelcast/hazelcast.xml")
+.withEnv("HAZELCAST_CONFIG", "hazelcast.xml");
 
 	@BeforeAll
 	static void setUpClass() {
@@ -72,7 +72,7 @@ class ClientServerHazelcastIndexedSessionRepositoryITests extends AbstractHazelc
 			ClientConfig clientConfig = new ClientConfig();
 			clientConfig.getNetworkConfig().addAddress(container.getHost() + ":" + container.getFirstMappedPort());
 			clientConfig.getUserCodeDeploymentConfig().setEnabled(true).addClass(Session.class)
-					.addClass(MapSession.class).addClass(SessionUpdateEntryProcessor.class);
+		.addClass(MapSession.class).addClass(SessionUpdateEntryProcessor.class);
 			return HazelcastClient.newHazelcastClient(clientConfig);
 		}
 

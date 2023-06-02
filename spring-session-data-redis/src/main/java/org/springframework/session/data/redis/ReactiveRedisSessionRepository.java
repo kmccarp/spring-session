@@ -40,8 +40,7 @@ import org.springframework.util.Assert;
  * @author Kai Zhao
  * @since 2.2.0
  */
-public class ReactiveRedisSessionRepository
-		implements ReactiveSessionRepository<ReactiveRedisSessionRepository.RedisSession> {
+public class ReactiveRedisSessionRepositoryimplements ReactiveSessionRepository<ReactiveRedisSessionRepository.RedisSession> {
 
 	/**
 	 * The default namespace for each key and channel in Redis used by Spring Session.
@@ -132,7 +131,7 @@ public class ReactiveRedisSessionRepository
 		}
 		String sessionKey = getSessionKey(session.hasChangedSessionId() ? session.originalSessionId : session.getId());
 		return this.sessionRedisOperations.hasKey(sessionKey).flatMap(
-				(exists) -> exists ? session.save() : Mono.error(new IllegalStateException("Session was invalidated")));
+	(exists) -> exists ? session.save() : Mono.error(new IllegalStateException("Session was invalidated")));
 	}
 
 	@Override
@@ -141,12 +140,12 @@ public class ReactiveRedisSessionRepository
 
 		// @formatter:off
 		return this.sessionRedisOperations.opsForHash().entries(sessionKey)
-				.collectMap((e) -> e.getKey().toString(), Map.Entry::getValue)
-				.filter((map) -> !map.isEmpty())
-				.map(new RedisSessionMapper(id))
-				.filter((session) -> !session.isExpired())
-				.map((session) -> new RedisSession(session, false))
-				.switchIfEmpty(Mono.defer(() -> deleteById(id).then(Mono.empty())));
+	.collectMap((e) -> e.getKey().toString(), Map.Entry::getValue)
+	.filter((map) -> !map.isEmpty())
+	.map(new RedisSessionMapper(id))
+	.filter((session) -> !session.isExpired())
+	.map((session) -> new RedisSession(session, false))
+	.switchIfEmpty(Mono.defer(() -> deleteById(id).then(Mono.empty())));
 		// @formatter:on
 	}
 
@@ -188,12 +187,12 @@ public class ReactiveRedisSessionRepository
 			if (this.isNew) {
 				this.delta.put(RedisSessionMapper.CREATION_TIME_KEY, cached.getCreationTime().toEpochMilli());
 				this.delta.put(RedisSessionMapper.MAX_INACTIVE_INTERVAL_KEY,
-						(int) cached.getMaxInactiveInterval().getSeconds());
+			(int) cached.getMaxInactiveInterval().getSeconds());
 				this.delta.put(RedisSessionMapper.LAST_ACCESSED_TIME_KEY, cached.getLastAccessedTime().toEpochMilli());
 			}
 			if (this.isNew || (ReactiveRedisSessionRepository.this.saveMode == SaveMode.ALWAYS)) {
 				getAttributeNames().forEach((attributeName) -> this.delta.put(getAttributeKey(attributeName),
-						cached.getAttribute(attributeName)));
+			cached.getAttribute(attributeName)));
 			}
 		}
 
@@ -211,7 +210,7 @@ public class ReactiveRedisSessionRepository
 		public <T> T getAttribute(String attributeName) {
 			T attributeValue = this.cached.getAttribute(attributeName);
 			if (attributeValue != null
-					&& ReactiveRedisSessionRepository.this.saveMode.equals(SaveMode.ON_GET_ATTRIBUTE)) {
+		&& ReactiveRedisSessionRepository.this.saveMode.equals(SaveMode.ON_GET_ATTRIBUTE)) {
 				this.delta.put(getAttributeKey(attributeName), attributeValue);
 			}
 			return attributeValue;
@@ -281,11 +280,11 @@ public class ReactiveRedisSessionRepository
 
 			String sessionKey = getSessionKey(getId());
 			Mono<Boolean> update = ReactiveRedisSessionRepository.this.sessionRedisOperations.opsForHash()
-					.putAll(sessionKey, new HashMap<>(this.delta));
+		.putAll(sessionKey, new HashMap<>(this.delta));
 			Mono<Boolean> setTtl;
 			if (getMaxInactiveInterval().getSeconds() >= 0) {
 				setTtl = ReactiveRedisSessionRepository.this.sessionRedisOperations.expire(sessionKey,
-						getMaxInactiveInterval());
+			getMaxInactiveInterval());
 			}
 			else {
 				setTtl = ReactiveRedisSessionRepository.this.sessionRedisOperations.persist(sessionKey);
@@ -317,7 +316,7 @@ public class ReactiveRedisSessionRepository
 				String sessionKey = getSessionKey(sessionId);
 
 				return ReactiveRedisSessionRepository.this.sessionRedisOperations.rename(originalSessionKey, sessionKey)
-						.and(replaceSessionId);
+			.and(replaceSessionId);
 			}
 		}
 

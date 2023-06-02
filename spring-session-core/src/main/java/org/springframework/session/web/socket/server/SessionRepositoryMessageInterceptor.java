@@ -61,8 +61,7 @@ import org.springframework.web.socket.server.HandshakeInterceptor;
  * @author Rob Winch
  * @since 1.0
  */
-public final class SessionRepositoryMessageInterceptor<S extends Session>
-		implements ChannelInterceptor, HandshakeInterceptor {
+public final class SessionRepositoryMessageInterceptor<S extends Session>implements ChannelInterceptor, HandshakeInterceptor {
 
 	private static final String SPRING_SESSION_ID_ATTR_NAME = "SPRING.SESSION.ID";
 
@@ -78,7 +77,7 @@ public final class SessionRepositoryMessageInterceptor<S extends Session>
 		Assert.notNull(sessionRepository, "sessionRepository cannot be null");
 		this.sessionRepository = sessionRepository;
 		this.matchingMessageTypes = EnumSet.of(SimpMessageType.CONNECT, SimpMessageType.MESSAGE,
-				SimpMessageType.SUBSCRIBE, SimpMessageType.UNSUBSCRIBE);
+	SimpMessageType.SUBSCRIBE, SimpMessageType.UNSUBSCRIBE);
 	}
 
 	/**
@@ -125,7 +124,7 @@ public final class SessionRepositoryMessageInterceptor<S extends Session>
 
 	@Override
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
-			Map<String, Object> attributes) {
+Map<String, Object> attributes) {
 		if (request instanceof ServletServerHttpRequest) {
 			ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
 			HttpSession session = servletRequest.getServletRequest().getSession(false);
@@ -138,7 +137,7 @@ public final class SessionRepositoryMessageInterceptor<S extends Session>
 
 	@Override
 	public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
-			Exception exception) {
+Exception exception) {
 	}
 
 	public static String getSessionId(Map<String, Object> attributes) {

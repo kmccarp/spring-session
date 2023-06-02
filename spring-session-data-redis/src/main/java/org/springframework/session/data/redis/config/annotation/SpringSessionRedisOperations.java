@@ -37,7 +37,7 @@ import org.springframework.session.data.redis.RedisSessionRepository;
  * @see ReactiveRedisSessionRepository#getSessionRedisOperations()
  * @since 2.0.0
  */
-@Target({ ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE })
+@Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Value("#{sessionRepository.sessionRedisOperations}")
