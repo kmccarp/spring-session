@@ -136,7 +136,7 @@ public class HazelcastIndexedSessionRepository
 
 	private final HazelcastInstance hazelcastInstance;
 
-	private ApplicationEventPublisher eventPublisher = (event) -> {
+	private ApplicationEventPublisher eventPublisher = event -> {
 	};
 
 	private Duration defaultMaxInactiveInterval = Duration.ofSeconds(MapSession.DEFAULT_MAX_INACTIVE_INTERVAL_SECONDS);
@@ -391,7 +391,7 @@ public class HazelcastIndexedSessionRepository
 			this.originalId = cached.getId();
 			if (this.isNew || (HazelcastIndexedSessionRepository.this.saveMode == SaveMode.ALWAYS)) {
 				getAttributeNames()
-						.forEach((attributeName) -> this.delta.put(attributeName, cached.getAttribute(attributeName)));
+						.forEach(attributeName -> this.delta.put(attributeName, cached.getAttribute(attributeName)));
 			}
 		}
 
@@ -481,7 +481,7 @@ public class HazelcastIndexedSessionRepository
 		}
 
 		boolean hasChanges() {
-			return (this.lastAccessedTimeChanged || this.maxInactiveIntervalChanged || !this.delta.isEmpty());
+			return this.lastAccessedTimeChanged || this.maxInactiveIntervalChanged || !this.delta.isEmpty();
 		}
 
 		void clearChangeFlags() {

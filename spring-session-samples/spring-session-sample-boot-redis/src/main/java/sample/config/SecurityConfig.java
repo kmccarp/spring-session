@@ -36,12 +36,11 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http
-			.authorizeHttpRequests((authorize) -> authorize
+			.authorizeHttpRequests(authorize -> authorize
 				.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
 				.anyRequest().authenticated()
 			)
-			.formLogin((formLogin) -> formLogin
-				.permitAll()
+			.formLogin(org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer::permitAll
 			)
 			.build();
 	}

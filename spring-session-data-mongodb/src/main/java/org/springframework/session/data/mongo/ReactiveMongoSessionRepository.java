@@ -99,12 +99,12 @@ public class ReactiveMongoSessionRepository
 	@Override
 	public Mono<MongoSession> createSession() {
 		// @formatter:off
-		return Mono.fromSupplier(() -> this.sessionIdGenerationStrategy.generate())
+		return Mono.fromSupplier(this.sessionIdGenerationStrategy::generate)
 				.map(MongoSession::new)
-				.doOnNext((mongoSession) -> mongoSession.setMaxInactiveInterval(this.defaultMaxInactiveInterval))
+				.doOnNext(mongoSession -> mongoSession.setMaxInactiveInterval(this.defaultMaxInactiveInterval))
 				.doOnNext(
-						(mongoSession) -> mongoSession.setSessionIdGenerationStrategy(this.sessionIdGenerationStrategy))
-				.doOnNext((mongoSession) -> publishEvent(new SessionCreatedEvent(this, mongoSession)))
+						mongoSession -> mongoSession.setSessionIdGenerationStrategy(this.sessionIdGenerationStrategy))
+				.doOnNext(mongoSession -> publishEvent(new SessionCreatedEvent(this, mongoSession)))
 				.switchIfEmpty(Mono.just(new MongoSession(this.sessionIdGenerationStrategy)))
 				.subscribeOn(Schedulers.boundedElastic())
 				.publishOn(Schedulers.parallel());
@@ -116,7 +116,7 @@ public class ReactiveMongoSessionRepository
 
 		return Mono //
 				.justOrEmpty(MongoSessionUtils.convertToDBObject(this.mongoSessionConverter, session)) //
-				.flatMap((dbObject) -> {
+				.flatMap(dbObject -> {
 					if (session.hasChangedSessionId()) {
 
 						return this.mongoOperations
@@ -136,10 +136,10 @@ public class ReactiveMongoSessionRepository
 	public Mono<MongoSession> findById(String id) {
 
 		return findSession(id) //
-				.map((document) -> MongoSessionUtils.convertToSession(this.mongoSessionConverter, document)) //
-				.filter((mongoSession) -> !mongoSession.isExpired()) //
+				.map(document -> MongoSessionUtils.convertToSession(this.mongoSessionConverter, document)) //
+				.filter(mongoSession -> !mongoSession.isExpired()) //
 				.doOnNext(
-						(mongoSession) -> mongoSession.setSessionIdGenerationStrategy(this.sessionIdGenerationStrategy))
+						mongoSession -> mongoSession.setSessionIdGenerationStrategy(this.sessionIdGenerationStrategy))
 				.switchIfEmpty(Mono.defer(() -> this.deleteById(id).then(Mono.empty())));
 	}
 
@@ -147,10 +147,10 @@ public class ReactiveMongoSessionRepository
 	public Mono<Void> deleteById(String id) {
 
 		return findSession(id) //
-				.flatMap((document) -> this.mongoOperations.remove(document, this.collectionName) //
+				.flatMap(document -> this.mongoOperations.remove(document, this.collectionName) //
 						.then(Mono.just(document))) //
-				.map((document) -> MongoSessionUtils.convertToSession(this.mongoSessionConverter, document)) //
-				.doOnNext((mongoSession) -> publishEvent(new SessionDeletedEvent(this, mongoSession))) //
+				.map(document -> MongoSessionUtils.convertToSession(this.mongoSessionConverter, document)) //
+				.doOnNext(mongoSession -> publishEvent(new SessionDeletedEvent(this, mongoSession))) //
 				.then();
 	}
 

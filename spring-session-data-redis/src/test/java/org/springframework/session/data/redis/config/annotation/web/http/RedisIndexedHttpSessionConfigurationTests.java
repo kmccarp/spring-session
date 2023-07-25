@@ -274,7 +274,7 @@ class RedisIndexedHttpSessionConfigurationTests {
 		keyspaceEventsConfig.put("notify-keyspace-events", "KEA");
 		given(commandsMock.getConfig("notify-keyspace-events")).willReturn(keyspaceEventsConfig);
 
-		willAnswer((it) -> {
+		willAnswer(it -> {
 			SubscriptionListener listener = it.getArgument(0);
 			listener.onPatternSubscribed(it.getArgument(1), 0);
 			listener.onChannelSubscribed("__keyevent@0__:del".getBytes(), 0);
@@ -439,13 +439,13 @@ class RedisIndexedHttpSessionConfigurationTests {
 		@Bean
 		@Order(0)
 		SessionRepositoryCustomizer<RedisIndexedSessionRepository> sessionRepositoryCustomizerOne() {
-			return (sessionRepository) -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
+			return sessionRepository -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
 		}
 
 		@Bean
 		@Order(1)
 		SessionRepositoryCustomizer<RedisIndexedSessionRepository> sessionRepositoryCustomizerTwo() {
-			return (sessionRepository) -> sessionRepository
+			return sessionRepository -> sessionRepository
 					.setDefaultMaxInactiveInterval(Duration.ofSeconds(MAX_INACTIVE_INTERVAL_IN_SECONDS));
 		}
 
@@ -457,7 +457,7 @@ class RedisIndexedHttpSessionConfigurationTests {
 
 		@Bean
 		SessionRepositoryCustomizer<RedisIndexedSessionRepository> sessionRepositoryCustomizer() {
-			return (sessionRepository) -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
+			return sessionRepository -> sessionRepository.setDefaultMaxInactiveInterval(Duration.ZERO);
 		}
 
 	}

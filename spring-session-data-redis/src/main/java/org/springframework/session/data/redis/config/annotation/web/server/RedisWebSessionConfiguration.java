@@ -92,7 +92,7 @@ public class RedisWebSessionConfiguration implements BeanClassLoaderAware, Embed
 		sessionRepository.setSaveMode(this.saveMode);
 		sessionRepository.setSessionIdGenerationStrategy(this.sessionIdGenerationStrategy);
 		this.sessionRepositoryCustomizers
-				.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(sessionRepository));
+				.forEach(sessionRepositoryCustomizer -> sessionRepositoryCustomizer.customize(sessionRepository));
 		return sessionRepository;
 	}
 

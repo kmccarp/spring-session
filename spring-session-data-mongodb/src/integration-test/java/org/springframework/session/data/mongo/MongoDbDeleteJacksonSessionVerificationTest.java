@@ -113,7 +113,7 @@ public class MongoDbDeleteJacksonSessionVerificationTest {
 				.exchange() //
 				.expectStatus().isFound() //
 				.expectHeader()
-				.value(HttpHeaders.LOCATION, (value) -> AssertionsForClassTypes.assertThat(value).isEqualTo("/login"));
+				.value(HttpHeaders.LOCATION, value -> AssertionsForClassTypes.assertThat(value).isEqualTo("/login"));
 
 		// 5. Verify the original SESSION cookie no longer works.
 
@@ -122,7 +122,7 @@ public class MongoDbDeleteJacksonSessionVerificationTest {
 				.exchange() //
 				.expectStatus().isFound() //
 				.expectHeader()
-				.value(HttpHeaders.LOCATION, (value) -> AssertionsForClassTypes.assertThat(value).isEqualTo("/login"));
+				.value(HttpHeaders.LOCATION, value -> AssertionsForClassTypes.assertThat(value).isEqualTo("/login"));
 	}
 
 	@RestController
