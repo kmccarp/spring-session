@@ -105,7 +105,7 @@ public class MongoHttpSessionConfiguration implements BeanClassLoaderAware, Embe
 		repository.setSessionIdGenerator(this.sessionIdGenerator);
 
 		this.sessionRepositoryCustomizers
-				.forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(repository));
+				.forEach(sessionRepositoryCustomizer -> sessionRepositoryCustomizer.customize(repository));
 
 		return repository;
 	}
