@@ -47,7 +47,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
  */
 class SpringHttpSessionConfigurationTests {
 
-	private AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+    private final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 
 	@AfterEach
 	void closeContext() {

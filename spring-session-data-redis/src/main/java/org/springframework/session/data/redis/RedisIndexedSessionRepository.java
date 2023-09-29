@@ -307,7 +307,7 @@ public class RedisIndexedSessionRepository
 
 	private final RedisSessionExpirationPolicy expirationPolicy;
 
-	private ApplicationEventPublisher eventPublisher = (event) -> {
+	private ApplicationEventPublisher eventPublisher = event -> {
 	};
 
 	private Duration defaultMaxInactiveInterval = Duration.ofSeconds(MapSession.DEFAULT_MAX_INACTIVE_INTERVAL_SECONDS);
@@ -765,7 +765,7 @@ public class RedisIndexedSessionRepository
 				this.delta.put(RedisSessionMapper.LAST_ACCESSED_TIME_KEY, cached.getLastAccessedTime().toEpochMilli());
 			}
 			if (this.isNew || (RedisIndexedSessionRepository.this.saveMode == SaveMode.ALWAYS)) {
-				getAttributeNames().forEach((attributeName) -> this.delta.put(getSessionAttrNameKey(attributeName),
+				getAttributeNames().forEach(attributeName -> this.delta.put(getSessionAttrNameKey(attributeName),
 						cached.getAttribute(attributeName)));
 			}
 		}
@@ -890,7 +890,7 @@ public class RedisIndexedSessionRepository
 				this.isNew = false;
 			}
 			this.delta = new HashMap<>(this.delta.size());
-			Long originalExpiration = (this.originalLastAccessTime != null)
+			Long originalExpiration = this.originalLastAccessTime != null
 					? this.originalLastAccessTime.plus(getMaxInactiveInterval()).toEpochMilli() : null;
 			RedisIndexedSessionRepository.this.expirationPolicy.onExpirationUpdated(originalExpiration, this);
 		}

@@ -114,8 +114,9 @@ function ImConversationModel(stompClient,from) {
 
 		self.messages.push(new ImModel(message));
 
-		if (atBottom)
-				elem.scrollTop(elem[0].scrollHeight);
+        if (atBottom) {
+            elem.scrollTop(elem[0].scrollHeight)
+        };
 	};
 
 	self.chat = function(to) {

@@ -65,7 +65,7 @@ class HazelcastIndexedSessionRepositoryTests {
 
 	private static final String SPRING_SECURITY_CONTEXT = "SPRING_SECURITY_CONTEXT";
 
-	private HazelcastInstance hazelcastInstance = mock(HazelcastInstance.class);
+    private final HazelcastInstance hazelcastInstance = mock(HazelcastInstance.class);
 
 	@SuppressWarnings("unchecked")
 	private IMap<String, MapSession> sessions = mock(IMap.class);
