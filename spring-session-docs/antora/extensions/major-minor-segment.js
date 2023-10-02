@@ -91,8 +91,12 @@ function createSymbolicVersionAlias (component, version, symbolicVersionSegment,
 
 function computeOut (src, family, version, htmlUrlExtensionStyle) {
     let { component, module: module_, basename, extname, relative, stem } = src
-    if (component === 'ROOT') component = ''
-    if (module_ === 'ROOT') module_ = ''
+    if (component === 'ROOT') {
+        component = ''
+    }
+    if (module_ === 'ROOT') {
+        module_ = ''
+    }
     let indexifyPathSegment = ''
     let familyPathSegment = ''
 
@@ -157,12 +161,18 @@ function computePub (src, out, family, version, htmlUrlExtensionStyle) {
 }
 
 function computeVersionSegment (name, version, mode) {
-    if (mode === 'original') return !version || version === 'master' ? '' : version
+    if (mode === 'original') {
+        return !version || version === 'master' ? '' : version
+    }
     const strategy = this.latestVersionUrlSegmentStrategy
     // NOTE: special exception; revisit in Antora 3
     if (!version || version === 'master') {
-        if (mode !== 'alias') return ''
-        if (strategy === 'redirect:to') return
+    if (mode !== 'alias') {
+        return ''
+    }
+    if (strategy === 'redirect:to') {
+        return
+    }
     }
     if (strategy === 'redirect:to' || strategy === (mode === 'alias' ? 'redirect:from' : 'replace')) {
         const component = this.getComponent(name)
@@ -181,7 +191,9 @@ function computeVersionSegment (name, version, mode) {
 }
 
 function getGeneration(version) {
-    if (!version) return version;
+    if (!version) {
+        return version
+    };
     const firstIndex = version.indexOf('.')
     if (firstIndex < 0) {
         return version;
@@ -197,7 +209,7 @@ function out(args) {
 
 
 function no_data(key, value) {
-    if (key == "data" || key == "files") {
+    if ("data".equals(key) || "files".equals(key)) {
         return value ? "__data__" : value;
     }
     return value;

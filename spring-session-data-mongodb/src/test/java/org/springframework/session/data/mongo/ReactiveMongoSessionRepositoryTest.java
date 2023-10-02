@@ -85,7 +85,7 @@ public class ReactiveMongoSessionRepositoryTest {
 
 		this.repository.createSession() //
 				.as(StepVerifier::create) //
-				.expectNextMatches((mongoSession) -> {
+				.expectNextMatches(mongoSession -> {
 					assertThat(mongoSession.getId()).isNotEmpty();
 					assertThat(mongoSession.getMaxInactiveInterval())
 							.isEqualTo(Duration.ofSeconds(MapSession.DEFAULT_MAX_INACTIVE_INTERVAL_SECONDS));
@@ -215,7 +215,7 @@ public class ReactiveMongoSessionRepositoryTest {
 	void createSessionWhenSessionIdGeneratorThenUses() {
 		this.repository.setSessionIdGenerator(() -> "test");
 
-		this.repository.createSession().as(StepVerifier::create).assertNext((mongoSession) -> {
+		this.repository.createSession().as(StepVerifier::create).assertNext(mongoSession -> {
 			assertThat(mongoSession.getId()).isEqualTo("test");
 			assertThat(mongoSession.changeSessionId()).isEqualTo("test");
 		}).verifyComplete();
@@ -242,7 +242,7 @@ public class ReactiveMongoSessionRepositoryTest {
 		given(this.converter.convert(sessionDocument, TypeDescriptor.valueOf(Document.class),
 				TypeDescriptor.valueOf(MongoSession.class))).willReturn(session);
 
-		this.repository.findById(sessionId).as(StepVerifier::create).assertNext((mongoSession) -> {
+		this.repository.findById(sessionId).as(StepVerifier::create).assertNext(mongoSession -> {
 			String oldId = mongoSession.getId();
 			String newId = mongoSession.changeSessionId();
 			assertThat(oldId).isEqualTo(sessionId);

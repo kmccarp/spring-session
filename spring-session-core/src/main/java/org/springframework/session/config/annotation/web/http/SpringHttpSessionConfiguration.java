@@ -109,7 +109,7 @@ public class SpringHttpSessionConfiguration implements InitializingBean, Applica
 
 	@Override
 	public void afterPropertiesSet() {
-		CookieSerializer cookieSerializer = (this.cookieSerializer != null) ? this.cookieSerializer
+		CookieSerializer cookieSerializer = this.cookieSerializer != null ? this.cookieSerializer
 				: createDefaultCookieSerializer();
 		this.defaultHttpSessionIdResolver.setCookieSerializer(cookieSerializer);
 	}
